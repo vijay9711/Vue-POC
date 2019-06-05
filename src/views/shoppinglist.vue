@@ -1,7 +1,7 @@
 <template>
   <div>
     <Nav></Nav>
-    <h1>about</h1>
+    <h1>shopping list</h1>
   </div>
 </template>
 <script>
@@ -12,4 +12,3 @@ export default {
   }
 };
 </script>
-
