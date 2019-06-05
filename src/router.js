@@ -9,7 +9,7 @@ import Head from "./views/head.vue"
 
 Vue.use(Router)
 
-export default new Router({
+ const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
@@ -54,3 +54,17 @@ export default new Router({
     }
   ]
 })
+// router.beforeEach((to, from, next) => {
+//   // if (to.fullPath === '/about') {
+//   //   if (localStorage.getItem("username")==="vijay") {
+//   //    this.$router.push("/about")
+//   //   } 
+//   // }
+//   // if (to.fullPath === '/login') {
+//   //   if (localStorage.getItem("username")!=="vijay") {
+//   //     next('/');
+//   //   }
+//   // }
+//   next();
+// });
+export default router;

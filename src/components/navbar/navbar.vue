@@ -8,10 +8,23 @@
     </div>
 
     <div class="col-2">
-      <router-link to="/">Logout</router-link>
+      <button class="btn btn-primary logout" @click.prevent="clearUserData">Logout</button>
     </div>
   </div>
 </template>
+<script>
+
+export default {
+    name:"nav",
+    methods:{
+        clearUserData(){
+            localStorage.removeItem("username")
+            this.$router.push({name:'home'})
+        }
+    }
+}
+</script>
+
 <style>
 #nav {
   padding: 30px;
@@ -27,5 +40,8 @@
 }
 .nav{
     align-content: flex-end;
+}
+.logout{
+    padding:5px !important;
 }
 </style>
