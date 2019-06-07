@@ -15,7 +15,7 @@
           <button type="submit" class="btn btn-primary" @click.prevent="checkUser">Login</button>
           <button type="button" class="btn btn-primary ml-5" @click.prevent="clearData">cancel</button>
         </label>
-      </div>
+      </div> 
     </div>
   </div>
 </template>
