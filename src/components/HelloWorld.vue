@@ -13,7 +13,7 @@
         </p>
         <label>
           <button type="submit" class="btn btn-primary" @click.prevent="checkUser">Login</button>
-          <button type="button" class="btn btn-primary ml-5" @click.prevent="clearData">cancle</button>
+          <button type="button" class="btn btn-primary ml-5" @click.prevent="clearData">cancel</button>
         </label>
       </div>
     </div>
@@ -22,6 +22,8 @@
 
 <script>
 import router from "../router.js"
+import axios from "axios";
+import { URL } from "../service/service"
 
 export default {
   props: {
@@ -30,11 +32,14 @@ export default {
   data: function() {
     return {
       username: "",
-      password: ""
+      password: "",
     };
   },
   methods:{
     checkUser(){
+      axios.get(URL).then(res=>{
+        console.log(res.data)
+      })
       if(this.username === "vijay" && this.password==="vijay"){
         localStorage.setItem("username",this.username)
         this.$router.push({name:'dashboard'})
