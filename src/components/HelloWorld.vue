@@ -12,45 +12,51 @@
           <input type="password" v-model="password" class="rounded border border-primary">
         </p>
         <label>
-          <button type="submit" class="btn btn-primary" @click.prevent="checkUser">Login</button>
-          <button type="button" class="btn btn-primary ml-5" @click.prevent="clearData">cancel</button>
+          <mdb-btn type="submit" size="sm" color="primary" @click="checkUser">Login</mdb-btn>
+          <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
         </label>
-      </div> 
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import router from "../router.js"
+import router from "../router.js";
 import axios from "axios";
-import { URL } from "../service/service"
+import { URL } from "../service/service";
+import { mdbInput, mdbBtn } from "mdbvue";
+import { constants } from "crypto";
 
 export default {
+  components: {
+    "mdb-input": mdbInput,
+    "mdb-btn": mdbBtn
+  },
   props: {
     msg: String
   },
   data: function() {
     return {
       username: "",
-      password: "",
+      password: ""
     };
   },
-  methods:{
-    checkUser(){
-      axios.get(URL).then(res=>{
-        console.log(res.data)
-      })
-      if(this.username === "vijay" && this.password==="vijay"){
-        localStorage.setItem("username",this.username)
-        this.$router.push({name:'dashboard'})
-      }
-      else{
-        alert("username or password incorrect")
+  methods: {
+    checkUser() {
+      // axios.get(URL).then(res => {
+      //   console.log(res.data);
+      // });
+      console.log("data");
+      if (this.username === "vijay" && this.password === "vijay") {
+        localStorage.setItem("username", this.username);
+        this.$router.push({ name: "dashboard" });
+      } else {
+        alert("username or password incorrect");
       }
     },
-    clearData(){
-      this.username='',this.password=""
-      console.log("username ",this.username)
+    clearData() {
+      (this.username = ""), (this.password = "");
+      console.log("username ", this.username);
     }
   }
 };
