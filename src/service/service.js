@@ -1,2 +1,2 @@
-export const URL ="http://localhost:4000/data" ;
+export const URL =process.env.VUE_APP_URL ;
 

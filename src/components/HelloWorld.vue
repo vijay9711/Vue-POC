@@ -26,6 +26,9 @@ import axios from "axios";
 import { URL } from "../service/service";
 import { mdbInput, mdbBtn } from "mdbvue";
 import { constants } from "crypto";
+// import { UserDetail } from "../service/API/userdetail"
+
+// const userDetail = new UserDetail()
 
 export default {
   components: {
@@ -43,9 +46,9 @@ export default {
   },
   methods: {
     checkUser() {
-      // axios.get(URL).then(res => {
-      //   console.log(res.data);
-      // });
+    /*  userDetail.login().then(res => {
+        console.log(res.data);
+      });*/
       console.log("data");
       if (this.username === "vijay" && this.password === "vijay") {
         localStorage.setItem("username", this.username);
