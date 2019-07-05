@@ -4,18 +4,18 @@ const bodyParser = require('body-parser');
 
 const app = express();
 // Sapp.use(bodyParser.urlencoded({extended:true}));
- app.use(express.json({ extended: false}))
+app.use(express.json({ extended: false }))
 // <---------------------------connection---------------------------------> 
-mongoose.connect('mongodb+srv://vijay:vijay1997@vue-poc1-bnq3v.mongodb.net/test?retryWrites=true&w=majority',{
+mongoose.connect('mongodb+srv://vijay:vijay1997@vue-poc1-bnq3v.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
 });
 // <----------------------------schema------------------------------------->
 const pocSchema = new mongoose.Schema({
-    name:String,
-    password:String
+    name: String,
+    password: String
 })
 // <---------------------------------Model-----------------------------------> 
-const Poc = mongoose.model('Poc',pocSchema)
+const Poc = mongoose.model('Poc', pocSchema)
 // const data = {
 //     name: 'vijay',
 //     password: '123'
@@ -30,19 +30,21 @@ const Poc = mongoose.model('Poc',pocSchema)
 //     }
 // })
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
     res.send('sending from back end')
 });
 
-app.get('/index',(req,res)=>{
+app.get('/index', (req, res) => {
+    console.log("index")
     res.send("json from data API");
+
 })
 app.post('/username', (req, res) => {
     // res.json(req.body.username)
-     console.log(req.body)
+    console.log(req.body)
     //res.json(req.body.user)
-   // console.log(res.json(req.body.user));
+    // console.log(res.json(req.body.user));
 })
-app.listen(3001,()=>{
+app.listen(3001, () => {
     console.log("server running");
 })

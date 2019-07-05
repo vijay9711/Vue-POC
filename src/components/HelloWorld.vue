@@ -21,69 +21,71 @@
 </template>
 
 <script>
-import router from "../router.js";
-import axios from "axios";
-import { URL } from "../service/service";
-import { mdbInput, mdbBtn } from "mdbvue";
-import { constants } from "crypto";
-// import { UserDetail } from "../service/API/userdetail"
+  import router from "../router.js";
+  import axios from "axios";
+  import { URL } from "../service/service";
+  import { mdbInput, mdbBtn } from "mdbvue";
+  import { constants } from "crypto";
+  import { UserDetails } from "../service/API/userdetail"
 
-// const userDetail = new UserDetail()
-// const Axios = new axios();
-export default {
-  components: {
-    "mdb-input": mdbInput,
-    "mdb-btn": mdbBtn
-  },
-  props: {
-    msg: String
-  },
-  data: function() {
-    return {
-      username: "",
-      password: ""
-    };
-  },
-  methods: {
-    checkUser() {
-      let user ={"username": "sraa"}
-
-      axios.get("http://localhost:3001/index")
-      axios.post("http://localhost:3001/username", this.username)
-      //  {
-      //   headers: new Headers({
-      //     "Content-Type": "application/json"
-      //   }),
-      // }
-      );
-      // if (this.username === "vijay" && this.password === "vijay") {
-      //   localStorage.setItem("username", this.username);
-      //   this.$router.push({ name: "dashboard" });
-      // } else {
-      //   alert("username or password incorrect");
-      // }
+  const userDetail = new UserDetails()
+  export default {
+    components: {
+      "mdb-input": mdbInput,
+      "mdb-btn": mdbBtn
     },
-    clearData() {
-      (this.username = ""), (this.password = "");
-      console.log("username ", this.username);
+    props: {
+      msg: String
+    },
+    data: function () {
+      return {
+        username: "",
+        password: ""
+      };
+    },
+    methods: {
+      checkUser() {
+        let user = { "username": "sraa" }
+        userDetail.login()
+        // axios.get("http://localhost:3001/index")
+        // axios.post("http://localhost:3001/username", this.username)
+        //  {
+        //   headers: new Headers({
+        //     "Content-Type": "application/json"
+        //   }),
+        // }
+        // );
+        // if (this.username === "vijay" && this.password === "vijay") {
+        //   localStorage.setItem("username", this.username);
+        //   this.$router.push({ name: "dashboard" });
+        // } else {
+        //   alert("username or password incorrect");
+        // }
+      },
+      clearData() {
+        (this.username = ""), (this.password = "");
+        console.log("username ", this.username);
+      }
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+  h3 {
+    margin: 40px 0 0;
+  }
+
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  li {
+    display: inline-block;
+    margin: 0 10px;
+  }
+
+  a {
+    color: #42b983;
+  }
 </style>
