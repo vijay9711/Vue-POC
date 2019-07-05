@@ -29,7 +29,7 @@ import { constants } from "crypto";
 // import { UserDetail } from "../service/API/userdetail"
 
 // const userDetail = new UserDetail()
-
+// const Axios = new axios();
 export default {
   components: {
     "mdb-input": mdbInput,
@@ -46,16 +46,22 @@ export default {
   },
   methods: {
     checkUser() {
-    /*  userDetail.login().then(res => {
-        console.log(res.data);
-      });*/
-      console.log("data");
-      if (this.username === "vijay" && this.password === "vijay") {
-        localStorage.setItem("username", this.username);
-        this.$router.push({ name: "dashboard" });
-      } else {
-        alert("username or password incorrect");
-      }
+      let user ={"username": "sraa"}
+
+      axios.get("http://localhost:3001/index")
+      axios.post("http://localhost:3001/username", this.username)
+      //  {
+      //   headers: new Headers({
+      //     "Content-Type": "application/json"
+      //   }),
+      // }
+      );
+      // if (this.username === "vijay" && this.password === "vijay") {
+      //   localStorage.setItem("username", this.username);
+      //   this.$router.push({ name: "dashboard" });
+      // } else {
+      //   alert("username or password incorrect");
+      // }
     },
     clearData() {
       (this.username = ""), (this.password = "");
