@@ -9,4 +9,8 @@ export class UserDetails {
         const uri = "/index"
         return service.login(uri)
     }
+    signUp(data){
+        const uri = "/username"
+        return service.signUp(uri,data)
+    }
 }

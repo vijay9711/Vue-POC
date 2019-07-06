@@ -12,4 +12,11 @@ export class Service {
             withCredentials: false,
         });
     }
+    signUp(uri,data){
+        return axios.post(`${URL}`+`${uri}`,data,{
+            headers:{
+                "content-Type": "application/json",
+            }
+        })
+    }
 }
