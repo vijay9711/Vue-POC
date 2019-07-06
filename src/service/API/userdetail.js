@@ -1,24 +1,16 @@
-// import { URL } from "../service";
-// import { async } from "q";
+import { Service } from '../service'
 
-// async function userdetail(){
-//     try{
-//         const res = await fetch(`${URL}`)
-//         return res
-//     }
-//     catch (err){
-//         return err;
-//     }
-// }
-/*import Axios from "axios"
-import { URL } from "../service"
-const axios = new Axios()
+const service = new Service();
 
-export class Service{
-    constructor(){
-
+export class UserDetails {
+    constructor() {
     }
-    login(){
-        return axios.get(`${URL}`);
+    login() {
+        const uri = "/index"
+        return service.login(uri)
     }
-}*/
+    signUp(data){
+        const uri = "/username"
+        return service.signUp(uri,data)
+    }
+}
