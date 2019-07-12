@@ -5,12 +5,12 @@ const service = new Service();
 export class UserDetails {
     constructor() {
     }
-    login() {
+    login(data) {
         const uri = "/index"
-        return service.login(uri)
+        return service.login(uri, data)
     }
-    signUp(data){
+    signUp(data) {
         const uri = "/username"
-        return service.signUp(uri,data)
+        return service.signUp(uri, data)
     }
 }
