@@ -5,11 +5,11 @@ const bodyParser = require('body-parser');
 const app = express();
 // Sapp.use(bodyParser.urlencoded({extended:true}));
 app.use(express.json({ extended: false }))
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
-  });
+});
 // <---------------------------connection---------------------------------> 
 mongoose.connect('mongodb+srv://vijay:vijay1997@vue-poc1-bnq3v.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
@@ -17,49 +17,49 @@ mongoose.connect('mongodb+srv://vijay:vijay1997@vue-poc1-bnq3v.mongodb.net/test?
 // <----------------------------schema------------------------------------->
 const signUpSchema = new mongoose.Schema({
     first_name: String,
-    last_name:String,
+    last_name: String,
     password: String,
-    email:String,
-    phone:String,
+    email: String,
+    phone: String,
 
 })
 // <---------------------------------Model-----------------------------------> 
-const Vue_poc = mongoose.model('Vue_poc', signUpSchema)
+const User_details = mongoose.model('User_details', signUpSchema)
 // const data = {
 //     first_name: "vijay",
-//     last_name:"vj",
+//     last_name: "vj",
 //     password: "vijay",
-//     email:"vijay@gmail",
-//     phone:"23124134",
+//     email: "vijay@gmail",
+//     phone: "23124134",
 
 // }
 
-// Vue_poc.create(data,(err,res)=>{
-//     if(err){
+// User_details.create(data, (err, res) => {
+//     if (err) {
 //         throw err;
 //     }
-//     else{
+//     else {
 //         console.log(res)
 //     }
 // })
+const index = '/index'
 
 app.get('/', (req, res) => {
     res.send('sending from back end')
 });
 
-app.get('/index', (req, res) => {
-    console.log("index")
-    res.send("json from data API");
-
+app.get(index, (req, res) => {
+    console.log(req.body)
+    User_details.find()
 })
 app.post('/username', (req, res) => {
     // console.log(req.body)
     res.send("User add successfully")
-    Vue_poc.create(req.body,(err,data)=>{
-        if(err){
+    User_details.create(req.body, (err, data) => {
+        if (err) {
             throw err
         }
-        else{
+        else {
             console.log(data)
         }
     })

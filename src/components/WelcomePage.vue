@@ -1,6 +1,7 @@
 <template>
   <div>
-    <mdb-btn type="submit" size="sm" color="primary" class="float-left mb-1 switch-button" id="switchLogin" aria-controls="Login" @click="switchLogin">Login</mdb-btn>
+    <mdb-btn type="submit" size="sm" color="primary" class="float-left mb-1 switch-button" id="switchLogin"
+      aria-controls="Login" @click="switchLogin">Login</mdb-btn>
     <!-- <mdb-btn type="submit" size="sm" color="primary" class="collapsed" data-target="#Signup" aria-expanded="false"
       aria-controls="Signup" data-toggle="collapse" @click="checkUser">
     SignUp</mdb-btn>-->
@@ -12,18 +13,10 @@
               <h1 class="card-title">Login</h1>
               <div class="card-body">
                 <p class="p-0 mb-0 float-left">Email</p>
-                <input
-                  type="text"
-                  v-model="first_name"
-                  class="rounded border border-primary user-input"
-                />
+                <input type="text" v-model="email" class="rounded border border-primary user-input" />
 
                 <p class="p-0 mb-0 float-left">Password</p>
-                <input
-                  type="text"
-                  v-model="first_name"
-                  class="rounded border border-primary user-input"
-                />
+                <input type="password" v-model="password" class="rounded border border-primary user-input" />
 
                 <label>
                   <mdb-btn type="submit" size="sm" color="primary" @click="checkUser">Login</mdb-btn>
@@ -41,43 +34,23 @@
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">SignUp</h1>
               <div class="card-body m-auto" style="width: 18rem;">
-                <p class="p-0 mb-0 float-left">Frist_name</p>
-                <input
-                  type="text"
-                  v-model="first_name"
-                  class="rounded border border-primary user-input"
-                />
+                <p class="p-0 mb-0 float-left">Frist name</p>
+                <input type="text" v-model="first_name" class="rounded border border-primary user-input" />
 
-                <p class="p-0 mb-0 float-left">Last_name</p>
-                <input
-                  type="password"
-                  v-model="last_name"
-                  class="rounded border border-primary user-input"
-                />
+                <p class="p-0 mb-0 float-left">Last name</p>
+                <input type="text" v-model="last_name" class="rounded border border-primary user-input" />
 
                 <p class="p-0 mb-0 float-left">Password</p>
-                <input
-                  type="text"
-                  v-model="password"
-                  class="rounded border border-primary user-input"
-                />
+                <input type="password" v-model="password" class="rounded border border-primary user-input" />
 
                 <p class="p-0 mb-0 float-left">Email</p>
-                <input
-                  type="password"
-                  v-model="email"
-                  class="rounded border border-primary user-input"
-                />
+                <input type="text" v-model="email" class="rounded border border-primary user-input" />
 
                 <p class="p-0 mb-0 float-left">Phone</p>
-                <input
-                  type="password"
-                  v-model="phone"
-                  class="rounded border border-primary user-input"
-                />
+                <input type="text" v-model="phone" class="rounded border border-primary user-input" />
 
                 <label class=" w-100">
-                  <mdb-btn type="submit" size="sm" color="primary" @click="checkUser">SignUp</mdb-btn>
+                  <mdb-btn type="submit" size="sm" color="primary" @click="signUp">SignUp</mdb-btn>
                   <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
                 </label>
               </div>
@@ -90,116 +63,133 @@
 </template>
 
 <script>
-import router from "../router.js";
-import axios from "axios";
-import { URL } from "../service/service";
-import { mdbInput, mdbBtn } from "mdbvue";
-import { constants } from "crypto";
-import { UserDetails } from "../service/API/userdetail";
-import { setInterval, setImmediate } from "timers";
+  import router from "../router.js";
+  import axios from "axios";
+  import { URL } from "../service/service";
+  import { mdbInput, mdbBtn } from "mdbvue";
+  import { constants } from "crypto";
+  import { UserDetails } from "../service/API/userdetail";
+  import { setInterval, setImmediate } from "timers";
 
-const userDetail = new UserDetails();
-export default {
-  components: {
-    "mdb-input": mdbInput,
-    "mdb-btn": mdbBtn
-  },
-  props: {
-    msg: String
-  },
-  data: function() {
-    return {
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone: "",
-      password: "",
-      switch: true
-    };
-  },
-  methods: {
-    checkUser() {
-      let user = {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email,
-        phone: this.phone,
-        password: this.password
+  const userDetail = new UserDetails();
+  export default {
+    components: {
+      "mdb-input": mdbInput,
+      "mdb-btn": mdbBtn
+    },
+    props: {
+      msg: String
+    },
+    data: function () {
+      return {
+        first_name: "",
+        last_name: "",
+        email: "",
+        phone: "",
+        password: "",
+        switch: true
       };
-      userDetail.login();
-      userDetail.signUp(user);
-      // axios.get("http://localhost:3001/index")
-      // axios.post("http://localhost:3001/username", this.username)
-      //  {
-      //   headers: new Headers({
-      //     "Content-Type": "application/json"
-      //   }),
-      // }
-      // );
-      // if (this.username === "vijay" && this.password === "vijay") {
-      //   localStorage.setItem("username", this.username);
-      //   this.$router.push({ name: "dashboard" });
-      // } else {
-      //   alert("username or password incorrect");
-      // }
     },
-    clearData() {
-      (this.first_name = ""),
-        (this.last_name = ""),
-        (this.password = ""),
-        (this.email = ""),
-        (this.phone = "");
+    created() {
+      userDetail.login().then(res => {
+        console.log(res)
+      })
     },
-    switchLogin() {
-      console.log(document.getElementById("switchLogin").innerText);
-      if (document.getElementById("switchLogin").innerText === "LOGIN") {
-        document.getElementById("switchLogin").innerHTML = "SIGNUP";
-        $("#Signup").collapse("hide");
+    methods: {
+      checkUser() {
+        let data = {
+          email: this.email,
+          password: this.password
+        }
+        userDetail.login(data);
+        // axios.get("http://localhost:3001/index")
+        // axios.post("http://localhost:3001/username", this.username)
+        //  {
+        //   headers: new Headers({
+        //     "Content-Type": "application/json"
+        //   }),
+        // }
+        // );
+        // if (this.username === "vijay" && this.password === "vijay") {
+        //   localStorage.setItem("username", this.username);
+        //   this.$router.push({ name: "dashboard" });
+        // } else {
+        //   alert("username or password incorrect");
+        // }
+      },
+      signUp() {
+        let user = {
+          first_name: this.first_name,
+          last_name: this.last_name,
+          email: this.email,
+          phone: this.phone,
+          password: this.password
+        };
+        console.log("signUp details ", user)
+        // userDetail.signUp(user).then(res => {
+        //   console.log(res)
+        //   if (res.status == "200") {
+        //     this.switchLogin()
+        //   }
+        //   else {
+        //     alert("There is a error occur try to sign-up again")
+        //   }
+        // })
 
-        $("#Login").collapse("show");
-      } else if (
-        document.getElementById("switchLogin").innerText === "SIGNUP"
-      ) {
-        document.getElementById("switchLogin").innerHTML = "LOGIN";
-        $("#Login").collapse("hide");
-        $("#Signup").collapse("show");
-      }
-    },
-    Switch() {
-      if (!this.switch) {
-        this.switch = true;
-      } else if (this.switch) {
-        this.switch = false;
+      },
+      clearData() {
+        (this.first_name = ""),
+          (this.last_name = ""),
+          (this.password = ""),
+          (this.email = ""),
+          (this.phone = "");
+      },
+      switchLogin() {
+        console.log(document.getElementById("switchLogin").innerText);
+        if (document.getElementById("switchLogin").innerText === "LOGIN") {
+          document.getElementById("switchLogin").innerHTML = "SIGNUP";
+          $("#Signup").collapse("hide");
+          $("#Login").collapse("show");
+        } else if (
+          document.getElementById("switchLogin").innerText === "SIGNUP"
+        ) {
+          document.getElementById("switchLogin").innerHTML = "LOGIN";
+          $("#Login").collapse("hide");
+          $("#Signup").collapse("show");
+        }
       }
     }
-  }
-  // created: {
-  //   $('#Login').collapse('show')
-  // }
-};
+
+    // created: {
+    //   $('#Login').collapse('show')
+    // }
+  };
 </script>
 
 <style scoped>
-.user-input {
-  padding-left: 0.5rem !important;
-  margin-bottom: 1rem;
-  width: 100%;
-}
+  .user-input {
+    padding-left: 0.5rem !important;
+    margin-bottom: 1rem;
+    width: 100%;
+  }
 
-.register {
-  margin-left: 500px;
-}
-.login{
-  position: fixed;
-  margin-top: 250px !important;
-  margin-left: 200px !important;
-}
-.signup{
-  position: fixed;
-  margin-top: 350px !important;
-  margin-left: 200px !important;
-}
-.switch-button{
-  width: 100px !important;
-}
+  .register {
+    margin-left: 500px;
+  }
+
+  .login {
+    position: fixed;
+    margin-top: 250px !important;
+    margin-left: 200px !important;
+  }
+
+  .signup {
+    position: fixed;
+    margin-top: 350px !important;
+    margin-left: 200px !important;
+  }
+
+  .switch-button {
+    width: 100px !important;
+  }
 </style>
