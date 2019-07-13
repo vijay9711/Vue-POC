@@ -101,7 +101,10 @@
           email: this.email,
           password: this.password
         }
-        userDetail.login(data);
+        console.log("checkuser", data)
+        userDetail.login(data).then(res => {
+          console.log(res.data)
+        });
         // axios.get("http://localhost:3001/index")
         // axios.post("http://localhost:3001/username", this.username)
         //  {
@@ -126,15 +129,15 @@
           password: this.password
         };
         console.log("signUp details ", user)
-        // userDetail.signUp(user).then(res => {
-        //   console.log(res)
-        //   if (res.status == "200") {
-        //     this.switchLogin()
-        //   }
-        //   else {
-        //     alert("There is a error occur try to sign-up again")
-        //   }
-        // })
+        userDetail.signUp(user).then(res => {
+          console.log(res)
+          if (res.status == "200") {
+            this.switchLogin()
+          }
+          else {
+            alert("There is a error occur try to sign-up again")
+          }
+        })
 
       },
       clearData() {
