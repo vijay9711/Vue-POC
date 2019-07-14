@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 
 const app = express();
-// Sapp.use(bodyParser.urlencoded({extended:true}));
+app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json({ extended: false }))
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -48,9 +48,22 @@ app.get('/', (req, res) => {
     res.send('sending from back end')
 });
 
-app.get(index, (req, res) => {
-    console.log(req.body)
-    User_details.find()
+app.post(index, (req, res) => {
+    // console.log("req.body ", req.body)
+    let data = req.body;
+    User_details.find({ "email": data.email, "password": data.password }, (err, data) => {
+        if (err) {
+            throw err
+        }
+        else {
+            if (data.length !== 0) {
+                res.send("access_granted")
+            }
+            else if (data.length === 0) {
+                res.send("access_Denied")
+            }
+        }
+    })
 })
 app.post('/username', (req, res) => {
     // console.log(req.body)
