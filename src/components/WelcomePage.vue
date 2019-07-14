@@ -1,13 +1,13 @@
 <template>
   <div>
-    <mdb-btn type="submit" size="sm" color="primary" class="float-left mb-1 switch-button" id="switchLogin"
+    <mdb-btn type="submit" size="sm" color="primary" class="float-center mb-1 switch-button" id="switchLogin"
       aria-controls="Login" @click="switchLogin">Login</mdb-btn>
     <!-- <mdb-btn type="submit" size="sm" color="primary" class="collapsed" data-target="#Signup" aria-expanded="false"
       aria-controls="Signup" data-toggle="collapse" @click="checkUser">
     SignUp</mdb-btn>-->
     <div class="row">
       <div class="col-12 mb-0">
-        <div class="row align-items-center ">
+        <div class="row align-items-center">
           <div class="align-items-center collapse login" style="width: 20rem;" id="Login">
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">Login</h1>
@@ -70,6 +70,7 @@
   import { constants } from "crypto";
   import { UserDetails } from "../service/API/userdetail";
   import { setInterval, setImmediate } from "timers";
+  import particles from "vue-particles"
 
   const userDetail = new UserDetails();
   export default {
@@ -104,6 +105,12 @@
         console.log("checkuser", data)
         userDetail.login(data).then(res => {
           console.log(res.data)
+          if (res.data === "access_granted") {
+            this.$router.push({ name: "dashboard" });
+          }
+          else if (res.data === "access_Denied") {
+            alert("email or password incorrect ")
+          }
         });
         // axios.get("http://localhost:3001/index")
         // axios.post("http://localhost:3001/username", this.username)
