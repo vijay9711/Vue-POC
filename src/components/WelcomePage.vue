@@ -1,5 +1,10 @@
 <template>
-  <div>
+  <div class="welcome-page">
+    <w-alert 
+    :alertText="alertMessage"
+    :getType="alertType"
+    v-if="alert"
+    />
     <vue-particles
       color="#008080"
       linesColor="#000000"
@@ -99,15 +104,17 @@ import { URL } from "../service/service";
 import { mdbInput, mdbBtn } from "mdbvue";
 import { constants } from "crypto";
 import { UserDetails } from "../service/API/userdetail";
-import { setInterval, setImmediate } from "timers";
+import { setInterval, setImmediate, setTimeout } from "timers";
 import Particles from "vue-particles";
+import Alert from "../widget/Alert.vue"
 
 const userDetail = new UserDetails();
 export default {
   components: {
     "mdb-input": mdbInput,
     "mdb-btn": mdbBtn,
-    "w-particles": Particles
+    "w-particles": Particles,
+    "w-alert": Alert
   },
   props: {
     msg: String
@@ -119,7 +126,10 @@ export default {
       email: "",
       phone: "",
       password: "",
-      switch: true
+      alertMessage:"",
+      alertType:"",
+      switch: true,
+      alert:false
     };
   },
   created() {
@@ -140,11 +150,17 @@ export default {
             this.$router.push({ name: "dashboard" });
           } else if (res.data[0].access === "denied") {
             this.password = "";
-            alert("email or password incorrect ");
+            this.alertType = "warning"
+            this.alertMessage = "Email or password incorrect"
+            this.alert=true;
+            setTimeout(()=>{this.alert = false},3000)
           }
         });
       } else {
-        alert("Please enter your email and password");
+        this.alertType = "alert"
+        this.alertMessage = "Please enter your email and password"
+        this.alert=true;
+        setTimeout(()=>{this.alert = false},3000)
       }
     },
     signUp() {
@@ -155,13 +171,17 @@ export default {
         phone: this.phone,
         password: this.password
       };
-      console.log("signUp details ", user);
       userDetail.signUp(user).then(res => {
-        console.log(res);
         if (res.status == "200") {
           this.switchLogin();
+          this.alertMessage = "Sing-up success!"
+          this.alert=true;
+          setTimeout(()=>{this.alert = false},3000)
         } else {
-          alert("There is a error occur try to sign-up again");
+          this.alertType = 'alert'
+          this.alertMessage = "There is a error occur try to sign-up again"
+          this.alert=true;
+          setTimeout(()=>{this.alert = false},3000)
         }
       });
     },
@@ -195,6 +215,11 @@ export default {
 </script>
 
 <style scoped>
+.welcome-page{
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
 .user-input {
   padding-left: 0.5rem !important;
   margin-bottom: 1rem;
