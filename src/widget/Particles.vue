@@ -1,0 +1,21 @@
+<template>
+    <vue-particles
+        color="#dedede"
+        :particleOpacity="1"
+        :particlesNumber="200"
+        shapeType="circle"
+        :particleSize="4"
+        linesColor="#dedede"
+        :linesWidth="1"
+        :lineLinked="true"
+        :lineOpacity="0.4"
+        :linesDistance="150"
+        :moveSpeed="3"
+        :hoverEffect="true"
+        hoverMode="grab"
+        :clickEffect="true"
+        clickMode="repulse"
+        style="background-color:#0e1f41"
+      >
+      </vue-particles>
+</template>

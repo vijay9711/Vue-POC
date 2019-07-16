@@ -43,13 +43,14 @@ const User_details = mongoose.model('User_details', signUpSchema)
 //     }
 // })
 const index = '/index'
+const username = '/username';
+
 
 app.get('/', (req, res) => {
     res.send('sending from back end')
 });
 
 app.post(index, (req, res) => {
-    // console.log("req.body ", req.body)
     let data = req.body;
     User_details.find({ "email": data.email, "password": data.password }, (err, data) => {
         if (err) {
@@ -57,15 +58,26 @@ app.post(index, (req, res) => {
         }
         else {
             if (data.length !== 0) {
-                res.send("access_granted")
+                // res.send("access_granted")
+                res.json([
+                    {
+                        "id":data[0]._id,
+                        "access":"granted"
+                    }
+                ])
             }
             else if (data.length === 0) {
-                res.send("access_Denied")
+                // res.send("access_Denied")
+                res.json([
+                    {
+                        "access":"denied"
+                    }
+                ])
             }
         }
     })
 })
-app.post('/username', (req, res) => {
+app.post(username, (req, res) => {
     // console.log(req.body)
     res.send("User add successfully")
     User_details.create(req.body, (err, data) => {
@@ -77,6 +89,7 @@ app.post('/username', (req, res) => {
         }
     })
 })
+
 app.listen(3001, () => {
     console.log("server running");
 })
