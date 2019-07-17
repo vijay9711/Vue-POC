@@ -6,7 +6,7 @@
     v-if="alert"
     />
     <vue-particles
-      color="#008080"
+      color="#007bff"
       linesColor="#000000"
       :particlesNumber="100"
       :linesWidth="1"
@@ -37,12 +37,12 @@
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">Login</h1>
               <div class="card-body">
-                <p class="p-0 mb-0 float-left">Email</p>
-                <input type="text" v-model="email" class="rounded border border-primary user-input" />
-                <p class="p-0 mb-0 float-left">Password</p>
+                <p class="p-0 mb-0 float-left">Email</p><span class="required-alert">{{ errors.first('email') }}</span>
+                <input type="text" v-model="email" v-validate="'required|email'" name="email" class="rounded border border-primary user-input"/>
+                <p class="p-0 mb-0 float-left">Password</p><span class="required-alert">{{ errors.first('password') }}</span>
                 <input
                   type="password"
-                  v-model="password"
+                  v-model="password" v-validate="'required'" name="password"
                   class="rounded border border-primary user-input"
                 />
                 <label>
@@ -91,6 +91,7 @@
               </div>
             </div>
           </div>
+          <!-- <iframe src="https://media.kasperskydaily.com/wp-content/uploads/sites/92/2013/06/06050433/04.gif" class="password-gif"></iframe> -->
         </div>
       </div>
     </div>
@@ -171,6 +172,7 @@ export default {
         phone: this.phone,
         password: this.password
       };
+      if(this.first_name.length>0 && this.last_name.length > 0 && this.email.length>0 && this.password.length > 0 && this.phone){
       userDetail.signUp(user).then(res => {
         if (res.status == "200") {
           this.switchLogin();
@@ -184,6 +186,13 @@ export default {
           setTimeout(()=>{this.alert = false},3000)
         }
       });
+      }
+      else{
+        this.alertType = 'alert'
+          this.alertMessage = "Please fill the form to sign-up"
+          this.alert=true;
+          setTimeout(()=>{this.alert = false},3000)
+      }
     },
     clearData() {
       (this.first_name = ""),
@@ -216,9 +225,9 @@ export default {
 
 <style scoped>
 .welcome-page{
-  overflow: hidden !important;
-  overflow-x: hidden !important;
-  overflow-y: hidden !important;
+  overflow: none !important;
+  overflow-x: none !important;
+  overflow-y: none !important;
 }
 .user-input {
   padding-left: 0.5rem !important;
@@ -232,7 +241,7 @@ export default {
 
 .login {
   position: fixed;
-  margin-top: 200px !important;
+  margin-top: 275px !important;
   margin-left: 200px !important;
 }
 
@@ -244,5 +253,21 @@ export default {
 
 .switch-button {
   width: 100px !important;
+}
+.password-gif{
+  position: absolute;
+  right: 2rem;
+  top:4rem;
+  width:500px;
+  height:400px;
+  border:none;
+  /* border-radius: 30%; */
+  overflow: hidden !important;
+  scroll-behavior: none;
+}
+.required-alert{
+  font-size: 12px;
+  /* margin-left: -10px; */
+  color: red;
 }
 </style>
