@@ -179,11 +179,13 @@ export default {
           this.alertMessage = "Sing-up success!"
           this.alert=true;
           setTimeout(()=>{this.alert = false},3000)
+          this.clearData()
         } else {
           this.alertType = 'alert'
           this.alertMessage = "There is a error occur try to sign-up again"
           this.alert=true;
-          setTimeout(()=>{this.alert = false},3000)
+          setTimeout(()=>{his.alert = false},3000)
+          this.clearData()
         }
       });
       }
