@@ -1,6 +1,5 @@
 <template>
   <div>
-    <Nav></Nav>
     <h1>about</h1>
   </div>
 </template>

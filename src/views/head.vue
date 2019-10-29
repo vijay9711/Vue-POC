@@ -1,8 +1,6 @@
 <template>
   <div class="row">
-    <div class="col-12">
-      <Nav></Nav>
-    </div>
+    <div class="col-12"></div>
     <router-view></router-view>
   </div>
 </template>

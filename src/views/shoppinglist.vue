@@ -1,9 +1,8 @@
 <template>
   <div>
-    <Nav></Nav>
     <h1>shopping list</h1>
     <div class="row">
-      <mdb-input label="Item" type="text" v-model="item" class="itemInput m-auto"/>
+      <mdb-input label="Item" type="text" v-model="item" class="itemInput m-auto" />
       <mdb-btn size="sm" type="button" @click="addItem" color="primary m-auto addItem">Add Item</mdb-btn>
     </div>
     <div class="row listItems">
