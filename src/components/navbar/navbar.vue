@@ -15,10 +15,16 @@
 <script>
 export default {
   name: "nav",
+  props: {
+    heading: { type: String },
+    links: { type: Array },
+    "show-header": { type: Boolean, default: true },
+    "header-links": { type: Array }
+  },
   methods: {
     clearUserData() {
-      localStorage.removeItem("username");
-      this.$router.push({ name: "home" });
+      localStorage.clear();
+      this.$router.push({ name: "Authentication" });
     }
   }
 };

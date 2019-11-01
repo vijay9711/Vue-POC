@@ -17,7 +17,7 @@
       type="submit"
       size="sm"
       color="primary"
-      class="float-center mb-1 switch-button"
+      class="switch-button"
       id="switchLogin"
       aria-controls="Login"
       @click="switchLogin"
@@ -25,11 +25,13 @@
     <!-- <mdb-btn type="submit" size="sm" color="primary" class="collapsed" data-target="#Signup" aria-expanded="false"
       aria-controls="Signup" data-toggle="collapse" @click="checkUser">
     SignUp</mdb-btn>-->
-    <div class="row">
-      <div class="col-12 mb-0">
-        <div class="row align-items-center">
+    <div class="row p-0 m-0">
+      <div class="col-12 p-0 m-0 mb-0">
+        <div class="row align-items-center p-0 m-0">
+          <c-login @alertMsg="showAlert($event)" />
+          <c-signUp @switchLogin="switchLogin()" @alertMsg="showAlert($event)" />
           <!------------------------------------------------------------------ login ------------------------------------------------------>
-          <div class="align-items-center collapse login" style="width: 23rem;" id="Login">
+          <!-- <div class="align-items-center collapse login" style="width: 23rem;" id="Login">
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">Login</h1>
               <div class="card-body">
@@ -52,14 +54,20 @@
                   class="rounded border border-primary user-input"
                 />
                 <label>
-                  <mdb-btn type="submit" size="sm" color="primary" @click="checkUser">Login</mdb-btn>
+                  <mdb-btn
+                    type="submit"
+                    size="sm"
+                    color="primary"
+                    @keypress="checkUser"
+                    @click="checkUser"
+                  >Login</mdb-btn>
                   <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
                 </label>
               </div>
             </div>
-          </div>
+          </div>-->
           <!------------------------------------------------------------------ singUp ------------------------------------------------------>
-          <div class="align-items-center collapse signup" style="width: 23rem;" id="Signup">
+          <!-- <div class="align-items-center collapse signup" style="width: 23rem;" id="Signup">
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">SignUp</h1>
               <div class="card-body m-auto" style="width: 18rem;">
@@ -96,8 +104,7 @@
                 </label>
               </div>
             </div>
-          </div>
-          <!-- <iframe src="https://media.kasperskydaily.com/wp-content/uploads/sites/92/2013/06/06050433/04.gif" class="password-gif"></iframe> -->
+          </div>-->
         </div>
       </div>
     </div>
@@ -105,15 +112,15 @@
 </template>
 
 <script>
-import router from "../router.js";
-import axios from "axios";
-import { URL } from "../service/service";
 import { mdbInput, mdbBtn } from "mdbvue";
 import { constants } from "crypto";
 import { UserDetails } from "../service/API/userdetail";
 import { setInterval, setImmediate, setTimeout } from "timers";
 import Particles from "vue-particles";
 import Alert from "../widget/Alert.vue";
+import Login from "../components/WelcomePage/Login.vue";
+import SignUp from "../components/WelcomePage/SignUp.vue";
+// import router from "../router.js";
 
 const userDetail = new UserDetails();
 export default {
@@ -121,12 +128,14 @@ export default {
     "mdb-input": mdbInput,
     "mdb-btn": mdbBtn,
     "w-particles": Particles,
-    "w-alert": Alert
+    "w-alert": Alert,
+    "c-login": Login,
+    "c-signUp": SignUp
   },
   props: {
     msg: String
   },
-  data: function() {
+  data() {
     return {
       first_name: "",
       last_name: "",
@@ -140,89 +149,19 @@ export default {
     };
   },
   created() {
-    userDetail.login().then(res => {
-      console.log(res);
-    });
+    // userDetail.login().then(res => {
+    //   console.log(res);
+    // });
+    localStorage.clear();
   },
   methods: {
-    checkUser() {
-      let data = {
-        email: this.email,
-        password: this.password
-      };
-      if (this.email.length > 0 && this.password.length > 0) {
-        userDetail.login(data).then(res => {
-          if (res.data[0].access === "granted") {
-            localStorage.setItem("user_id", res.data[0].id + "a02");
-            this.$router.push({ name: "dashboard" });
-          } else if (res.data[0].access === "denied") {
-            this.password = "";
-            this.alertType = "warning";
-            this.alertMessage = "Email or password incorrect";
-            this.alert = true;
-            setTimeout(() => {
-              this.alert = false;
-            }, 3000);
-          }
-        });
-      } else {
-        this.alertType = "alert";
-        this.alertMessage = "Please enter your email and password";
-        this.alert = true;
-        setTimeout(() => {
-          this.alert = false;
-        }, 3000);
-      }
-    },
-    signUp() {
-      let user = {
-        first_name: this.first_name,
-        last_name: this.last_name,
-        email: this.email,
-        phone: this.phone,
-        password: this.password
-      };
-      if (
-        this.first_name.length > 0 &&
-        this.last_name.length > 0 &&
-        this.email.length > 0 &&
-        this.password.length > 0 &&
-        this.phone
-      ) {
-        userDetail.signUp(user).then(res => {
-          if (res.status == "200") {
-            this.switchLogin();
-            this.alertMessage = "Sing-up success!";
-            this.alert = true;
-            setTimeout(() => {
-              this.alert = false;
-            }, 3000);
-            this.clearData();
-          } else {
-            this.alertType = "alert";
-            this.alertMessage = "There is a error occur try to sign-up again";
-            this.alert = true;
-            setTimeout(() => {
-              his.alert = false;
-            }, 3000);
-            this.clearData();
-          }
-        });
-      } else {
-        this.alertType = "alert";
-        this.alertMessage = "Please fill the form to sign-up";
-        this.alert = true;
-        setTimeout(() => {
-          this.alert = false;
-        }, 3000);
-      }
-    },
-    clearData() {
-      (this.first_name = ""),
-        (this.last_name = ""),
-        (this.password = ""),
-        (this.email = ""),
-        (this.phone = "");
+    showAlert(event) {
+      this.alertType = event.alertType;
+      this.alertMessage = event.alertMsg;
+      this.alert = true;
+      setTimeout(() => {
+        this.alert = false;
+      }, 3000);
     },
     switchLogin() {
       console.log(document.getElementById("switchLogin").innerText);
