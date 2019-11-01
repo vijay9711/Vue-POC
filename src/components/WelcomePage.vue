@@ -1,10 +1,6 @@
 <template>
   <div class="welcome-page">
-    <w-alert 
-    :alertText="alertMessage"
-    :getType="alertType"
-    v-if="alert"
-    />
+    <w-alert :alertText="alertMessage" :getType="alertType" v-if="alert" />
     <vue-particles
       color="#007bff"
       linesColor="#000000"
@@ -37,12 +33,22 @@
             <div class="card m-auto p-3" style="width: 22rem;">
               <h1 class="card-title">Login</h1>
               <div class="card-body">
-                <p class="p-0 mb-0 float-left">Email</p><span class="required-alert">{{ errors.first('email') }}</span>
-                <input type="text" v-model="email" v-validate="'required|email'" name="email" class="rounded border border-primary user-input"/>
-                <p class="p-0 mb-0 float-left">Password</p><span class="required-alert">{{ errors.first('password') }}</span>
+                <p class="p-0 mb-0 float-left">Email</p>
+                <span class="required-alert">{{ errors.first('email') }}</span>
+                <input
+                  type="text"
+                  v-model="email"
+                  v-validate="'required|email'"
+                  name="email"
+                  class="rounded border border-primary user-input"
+                />
+                <p class="p-0 mb-0 float-left">Password</p>
+                <span class="required-alert">{{ errors.first('password') }}</span>
                 <input
                   type="password"
-                  v-model="password" v-validate="'required'" name="password"
+                  v-model="password"
+                  v-validate="'required'"
+                  name="password"
                   class="rounded border border-primary user-input"
                 />
                 <label>
@@ -107,7 +113,7 @@ import { constants } from "crypto";
 import { UserDetails } from "../service/API/userdetail";
 import { setInterval, setImmediate, setTimeout } from "timers";
 import Particles from "vue-particles";
-import Alert from "../widget/Alert.vue"
+import Alert from "../widget/Alert.vue";
 
 const userDetail = new UserDetails();
 export default {
@@ -127,10 +133,10 @@ export default {
       email: "",
       phone: "",
       password: "",
-      alertMessage:"",
-      alertType:"",
+      alertMessage: "",
+      alertType: "",
       switch: true,
-      alert:false
+      alert: false
     };
   },
   created() {
@@ -151,17 +157,21 @@ export default {
             this.$router.push({ name: "dashboard" });
           } else if (res.data[0].access === "denied") {
             this.password = "";
-            this.alertType = "warning"
-            this.alertMessage = "Email or password incorrect"
-            this.alert=true;
-            setTimeout(()=>{this.alert = false},3000)
+            this.alertType = "warning";
+            this.alertMessage = "Email or password incorrect";
+            this.alert = true;
+            setTimeout(() => {
+              this.alert = false;
+            }, 3000);
           }
         });
       } else {
-        this.alertType = "alert"
-        this.alertMessage = "Please enter your email and password"
-        this.alert=true;
-        setTimeout(()=>{this.alert = false},3000)
+        this.alertType = "alert";
+        this.alertMessage = "Please enter your email and password";
+        this.alert = true;
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
       }
     },
     signUp() {
@@ -172,28 +182,39 @@ export default {
         phone: this.phone,
         password: this.password
       };
-      if(this.first_name.length>0 && this.last_name.length > 0 && this.email.length>0 && this.password.length > 0 && this.phone){
-      userDetail.signUp(user).then(res => {
-        if (res.status == "200") {
-          this.switchLogin();
-          this.alertMessage = "Sing-up success!"
-          this.alert=true;
-          setTimeout(()=>{this.alert = false},3000)
-          this.clearData()
-        } else {
-          this.alertType = 'alert'
-          this.alertMessage = "There is a error occur try to sign-up again"
-          this.alert=true;
-          setTimeout(()=>{his.alert = false},3000)
-          this.clearData()
-        }
-      });
-      }
-      else{
-        this.alertType = 'alert'
-          this.alertMessage = "Please fill the form to sign-up"
-          this.alert=true;
-          setTimeout(()=>{this.alert = false},3000)
+      if (
+        this.first_name.length > 0 &&
+        this.last_name.length > 0 &&
+        this.email.length > 0 &&
+        this.password.length > 0 &&
+        this.phone
+      ) {
+        userDetail.signUp(user).then(res => {
+          if (res.status == "200") {
+            this.switchLogin();
+            this.alertMessage = "Sing-up success!";
+            this.alert = true;
+            setTimeout(() => {
+              this.alert = false;
+            }, 3000);
+            this.clearData();
+          } else {
+            this.alertType = "alert";
+            this.alertMessage = "There is a error occur try to sign-up again";
+            this.alert = true;
+            setTimeout(() => {
+              his.alert = false;
+            }, 3000);
+            this.clearData();
+          }
+        });
+      } else {
+        this.alertType = "alert";
+        this.alertMessage = "Please fill the form to sign-up";
+        this.alert = true;
+        setTimeout(() => {
+          this.alert = false;
+        }, 3000);
       }
     },
     clearData() {
@@ -226,7 +247,7 @@ export default {
 </script>
 
 <style scoped>
-.welcome-page{
+.welcome-page {
   overflow: none !important;
   overflow-x: none !important;
   overflow-y: none !important;
@@ -256,18 +277,18 @@ export default {
 .switch-button {
   width: 100px !important;
 }
-.password-gif{
+.password-gif {
   position: absolute;
   right: 2rem;
-  top:4rem;
-  width:500px;
-  height:400px;
-  border:none;
+  top: 4rem;
+  width: 500px;
+  height: 400px;
+  border: none;
   /* border-radius: 30%; */
   overflow: hidden !important;
   scroll-behavior: none;
 }
-.required-alert{
+.required-alert {
   font-size: 12px;
   /* margin-left: -10px; */
   color: red;
