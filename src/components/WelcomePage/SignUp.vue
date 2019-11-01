@@ -1,5 +1,5 @@
 <template>
-  <div class="align-items-center collapse signup" style="width: 23rem;" id="Signup">
+  <div class="collapse signup" style="width: 23rem;" id="Signup">
     <div class="card m-auto p-3" style="width: 22rem;">
       <h1 class="card-title">SignUp</h1>
       <div class="card-body m-auto" style="width: 18rem;">
@@ -105,47 +105,18 @@ export default {
 </script>
 
 <style scoped>
-.welcome-page {
-  overflow: none !important;
-  overflow-x: none !important;
-  overflow-y: none !important;
-}
 .user-input {
   padding-left: 0.5rem !important;
   margin-bottom: 1rem;
   width: 100%;
 }
 
-.register {
-  margin-left: 500px;
-}
-
-.login {
-  position: fixed;
-  margin-top: 275px !important;
-  margin-left: 200px !important;
-}
-
 .signup {
-  position: fixed;
-  margin-top: 300px !important;
-  margin-left: 200px !important;
+  position: absolute;
+  margin-left: 60rem;
+  margin-top: 25rem;
 }
 
-.switch-button {
-  width: 100px !important;
-}
-.password-gif {
-  position: absolute;
-  right: 2rem;
-  top: 4rem;
-  width: 500px;
-  height: 400px;
-  border: none;
-  /* border-radius: 30%; */
-  overflow: hidden !important;
-  scroll-behavior: none;
-}
 .required-alert {
   font-size: 12px;
   /* margin-left: -10px; */
