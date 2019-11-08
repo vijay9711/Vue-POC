@@ -1,25 +1,26 @@
 <template>
-  <div class="collapse login" style="width: 23rem;" id="Login">
+  <div class="collapse login" style="width: 23rem; margin: auto;" id="Login">
     <div class="p-4" style="width: 22rem; background-color:transparent">
       <h1 class="row p-0 m-0 login-title">Login</h1>
       <div class="login-card-body">
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Email</p>
-        <input
-          type="text"
+        <b-form-input
+          id="name-formatter"
+          autocomplete="off"
           v-model="email"
           v-validate="'required|email'"
-          name="email"
           class="login-user-input"
-        />
+          placeholder="Enter your name"
+        ></b-form-input>
         <p class="required-alert my-1">{{ errors.first('email') }}</p>
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Password</p>
-        <input
-          type="password"
-          v-model="password"
-          v-validate="'required'"
-          name="password"
+        <b-form-input
+          id="password-formatter"
+          v-model="passsword"
+          v-validate="'required|password'"
           class="login-user-input"
-        />
+          placeholder="Enter your password"
+        ></b-form-input>
         <p class="required-alert my-1">{{ errors.first('password') }}</p>
         <label>
           <mdb-btn
@@ -64,6 +65,7 @@ export default {
         email: this.email,
         password: this.password
       };
+      console.log(data);
       if (this.email.length > 0 && this.password.length > 0) {
         userDetail.login(data).then(res => {
           if (res.data[0].access === "granted") {
@@ -101,6 +103,7 @@ export default {
 .login-title {
   font-weight: 700;
   margin: auto !important;
+  margin-bottom: 1rem !important;
 }
 .login-card-body {
   padding: 0;
@@ -115,21 +118,32 @@ input[type="text"] {
 input[type="password"] {
   background: transparent !important;
 }
+.login-user-input::placeholder {
+  background-color: transparent;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-background-clip: yellow !important;
+  background-color: transparent !important;
+}
 .login-user-input {
   width: 100%;
   border: 0px !important;
   border-bottom: 1px solid black !important;
   padding-left: 0.5rem;
+  border-radius: 0px;
 }
 .login-user-input:focus {
-  border: 0px !important;
-}
-.login-user-input:active {
-  border: 0px !important;
+  box-shadow: none !important;
+  outline: none !important;
 }
 .login {
-  /* position: absolute; */
-  margin: auto;
+  border: 1px solid black;
+  /* border-right: 1px solid black; */
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
 }
 
 .required-alert {

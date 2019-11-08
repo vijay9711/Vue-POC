@@ -1,27 +1,57 @@
 <template>
-  <div class="collapse signup" style="width: 23rem;" id="Signup">
-    <div class="p-4" style="width: 22rem; background-color:transparent">
-      <h1 class="card-title">SignUp</h1>
-      <div class="card-body p-0" style="width: 18rem;">
-        <p class="p-0 mb-0 float-left">Frist name</p>
-        <input type="text" v-model="first_name" class="rounded border border-primary user-input" />
+  <div class="collapse" style="width: 23rem;margin: auto;" id="Signup">
+    <div class="signup p-4" style="width: 22rem; background-color:transparent">
+      <h1 class="signup-title">SignUp</h1>
+      <div class="signup-body p-0" style="width: 18rem;">
+        <p class="signup-input-label p-0 mb-0 mt-1 float-left">First name</p>
+        <!-- <input type="text" v-model="first_name" class="signup-user-input" /> -->
+        <b-form-input
+          id="first-name"
+          v-model="first_name"
+          v-validate="'required|email'"
+          class="signup-user-input"
+          placeholder
+        ></b-form-input>
 
-        <p class="p-0 mb-0 float-left">Last name</p>
-        <input type="text" v-model="last_name" class="rounded border border-primary user-input" />
-
-        <p class="p-0 mb-0 float-left">Password</p>
-        <input type="password" v-model="password" class="rounded border border-primary user-input" />
-
-        <p class="p-0 mb-0 float-left">Email</p>
-        <input type="text" v-model="email" class="rounded border border-primary user-input" />
-
-        <p class="p-0 mb-0 float-left">Phone</p>
-        <input type="text" v-model="phone" class="rounded border border-primary user-input" />
-
-        <label class="w-100">
-          <mdb-btn type="submit" size="sm" color="primary" @click="signUp">SignUp</mdb-btn>
-          <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
-        </label>
+        <p class="signup-input-label p-0 mb-0 mt-1 float-left">Last name</p>
+        <b-form-input
+          id="last-name"
+          v-model="last_name"
+          v-validate="'required|email'"
+          class="signup-user-input"
+          placeholder
+        ></b-form-input>
+        <p class="signup-input-label p-0 mb-0 mt-1 float-left">Password</p>
+        <b-form-input
+          id="last-name"
+          v-model="password"
+          type="password"
+          v-validate="'required|email'"
+          class="signup-user-input"
+          placeholder
+        ></b-form-input>
+        <p class="signup-input-label p-0 mb-0 mt-1 float-left">Email</p>
+        <b-form-input
+          id="last-name"
+          v-model="email"
+          type
+          v-validate="'required|email'"
+          class="signup-user-input"
+          placeholder
+        ></b-form-input>
+        <p class="signup-input-label p-0 mb-0 mt-1 float-left">Phone</p>
+        <b-form-input
+          id="last-name"
+          v-model="phone"
+          type
+          v-validate="'required|email'"
+          class="signup-user-input"
+          placeholder
+        ></b-form-input>
+        <div class="row mt-2 w-100">
+          <mdb-btn type="submit" class="m-auto" size="sm" @click="signUp">SignUp</mdb-btn>
+          <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -105,26 +135,49 @@ export default {
 </script>
 
 <style scoped>
-.user-input {
-  padding-left: 0.5rem !important;
-  margin-bottom: 1rem;
-  width: 100%;
+.signup {
+  border: 1px solid black;
+  /* border-right: 1px solid black; */
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
+}
+.signup-title {
+  font-weight: 700;
+  margin: auto !important;
+  margin-bottom: 1rem !important;
+}
+.signup-input-label {
+  font-weight: 500;
+  font-size: 18px;
 }
 
-.signup {
-  /* position: absolute; */
-  margin: auto;
+input[type="text"] {
+  background-color: transparent !important;
+}
+input[type="password"] {
+  background-color: transparent !important;
+}
+.signup-user-input {
+  width: 100%;
+  border: 0px !important;
+  border-bottom: 1px solid black !important;
+  padding-left: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-radius: 0;
+}
+.signup-user-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.signup-user-input::placeholder {
+  color: #101820ff;
+  font-size: 16px;
 }
 
 .required-alert {
   font-size: 12px;
   /* margin-left: -10px; */
   color: red;
-}
-input[type="text"] {
-  background-color: transparent !important;
-}
-input[type="text"]::placeholder {
-  background-color: transparent !important;
 }
 </style>
