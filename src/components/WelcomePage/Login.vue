@@ -1,26 +1,26 @@
 <template>
   <div class="collapse login" style="width: 23rem;" id="Login">
-    <div class="card m-auto p-3" style="width: 22rem;">
-      <h1 class="card-title">Login</h1>
-      <div class="card-body">
-        <p class="p-0 mb-0 float-left">Email</p>
-        <span class="required-alert">{{ errors.first('email') }}</span>
+    <div class="p-4" style="width: 22rem; background-color:transparent">
+      <h1 class="row p-0 m-0 login-title">Login</h1>
+      <div class="login-card-body">
+        <p class="login-input-label p-0 mb-0 mt-1 float-left">Email</p>
         <input
           type="text"
           v-model="email"
           v-validate="'required|email'"
           name="email"
-          class="rounded border border-primary user-input"
+          class="login-user-input"
         />
-        <p class="p-0 mb-0 float-left">Password</p>
-        <span class="required-alert">{{ errors.first('password') }}</span>
+        <p class="required-alert my-1">{{ errors.first('email') }}</p>
+        <p class="login-input-label p-0 mb-0 mt-1 float-left">Password</p>
         <input
           type="password"
           v-model="password"
           v-validate="'required'"
           name="password"
-          class="rounded border border-primary user-input"
+          class="login-user-input"
         />
+        <p class="required-alert my-1">{{ errors.first('password') }}</p>
         <label>
           <mdb-btn
             type="submit"
@@ -98,20 +98,48 @@ export default {
 </script>
 
 <style scoped>
-.user-input {
-  padding-left: 0.5rem !important;
-  margin-bottom: 1rem;
-  width: 100%;
+.login-title {
+  font-weight: 700;
+  margin: auto !important;
 }
-
+.login-card-body {
+  padding: 0;
+}
+.login-input-label {
+  font-weight: 400;
+  font-size: 20px;
+}
+input[type="text"] {
+  background: transparent !important;
+}
+input[type="password"] {
+  background: transparent !important;
+}
+.login-user-input {
+  width: 100%;
+  border: 0px !important;
+  border-bottom: 1px solid black !important;
+  padding-left: 0.5rem;
+}
+.login-user-input:focus {
+  border: 0px !important;
+}
+.login-user-input:active {
+  border: 0px !important;
+}
 .login {
-  position: absolute;
-  margin-left: 60rem;
-  margin-top: 20rem;
+  /* position: absolute; */
+  margin: auto;
 }
 
 .required-alert {
-  font-size: 12px;
+  font-size: 15px;
   color: red;
+}
+@media only screen and (max-width: 400px) {
+  .login {
+    margin-left: 30rem;
+    margin-top: 20rem;
+  }
 }
 </style>

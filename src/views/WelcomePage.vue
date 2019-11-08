@@ -1,7 +1,7 @@
 <template>
   <div class="welcome-page">
     <w-alert :alertText="alertMessage" :getType="alertType" v-if="alert" />
-    <vue-particles
+    <!-- <vue-particles
       color="#007bff"
       linesColor="#000000"
       :particlesNumber="100"
@@ -12,22 +12,23 @@
       clickMode="repulse"
       style="background-color:#fff; zIndex:-1; position:fixed;"
       class="h-100 w-100"
-    ></vue-particles>
-    <div class="row p-0 m-0">
-      <div class="col-12 p-0 m-0 mb-0">
-        <div class="row align-items-center p-0 m-0 form-space">
-          <mdb-btn
-            type="submit"
-            size="sm"
-            color="primary"
-            class="switch-button"
-            id="switchLogin"
-            aria-controls="Login"
-            @click="switchLogin"
-          >{{switchButtonText}}</mdb-btn>
-          <c-login @alertMsg="showAlert($event)" />
-          <c-signUp @switchLogin="switchLogin()" @alertMsg="showAlert($event)" />
-        </div>
+    ></vue-particles>-->
+    <mdb-btn
+      type="submit"
+      size="sm"
+      color="primary"
+      id="switchLogin"
+      aria-controls="Login"
+      @click="switchLogin"
+    >{{switchButtonText}}</mdb-btn>
+    <div class="row p-0 m-0 auth-form">
+      <div class="col-12 p-0 m-0 form-switch">
+        <c-login class="col-6 p-0 m-0 ml-auto mr-5" @alertMsg="showAlert($event)" />
+        <c-signUp
+          class="col-6 p-0 m-0 ml-auto mr-5"
+          @switchLogin="switchLogin()"
+          @alertMsg="showAlert($event)"
+        />
       </div>
     </div>
   </div>
@@ -54,9 +55,7 @@ export default {
     "c-login": Login,
     "c-signUp": SignUp
   },
-  props: {
-    msg: String
-  },
+  props: {},
   data() {
     return {
       first_name: "",
@@ -102,24 +101,20 @@ export default {
 </script>
 
 <style scoped>
+.welcome-page {
+  background-image: url("../assets/yellow-chart-with-pencil.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  background-color: #464646;
+  background-repeat: no-repeat;
+  height: 100vh;
+}
 .register {
   margin-left: 500px;
 }
-
-.switch-button {
-  position: fixed;
-  margin-top: 20rem;
-  margin-left: 10rem;
-  margin-right: 5rem;
-  margin-bottom: 5rem;
-}
-.required-alert {
-  font-size: 12px;
-  /* margin-left: -10px; */
-  color: red;
-}
-
-.form-space {
-  width: 20rem;
+.form-switch {
+  height: auto !important;
+  margin-top: 5rem !important;
 }
 </style>

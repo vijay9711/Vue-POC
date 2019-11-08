@@ -1,8 +1,8 @@
 <template>
   <div class="collapse signup" style="width: 23rem;" id="Signup">
-    <div class="card m-auto p-3" style="width: 22rem;">
+    <div class="p-4" style="width: 22rem; background-color:transparent">
       <h1 class="card-title">SignUp</h1>
-      <div class="card-body m-auto" style="width: 18rem;">
+      <div class="card-body p-0" style="width: 18rem;">
         <p class="p-0 mb-0 float-left">Frist name</p>
         <input type="text" v-model="first_name" class="rounded border border-primary user-input" />
 
@@ -112,14 +112,19 @@ export default {
 }
 
 .signup {
-  position: absolute;
-  margin-left: 60rem;
-  margin-top: 25rem;
+  /* position: absolute; */
+  margin: auto;
 }
 
 .required-alert {
   font-size: 12px;
   /* margin-left: -10px; */
   color: red;
+}
+input[type="text"] {
+  background-color: transparent !important;
+}
+input[type="text"]::placeholder {
+  background-color: transparent !important;
 }
 </style>
