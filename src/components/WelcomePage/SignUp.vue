@@ -1,14 +1,15 @@
 <template>
-  <div class="collapse" style="width: 23rem;margin: auto;" id="Signup">
-    <div class="signup p-4" style="width: 22rem; background-color:transparent">
+  <div class="collapse" style="width: 23rem;" id="Signup">
+    <div class="col-xs-2 signup p-4" style>
       <h1 class="signup-title">SignUp</h1>
-      <div class="signup-body p-0" style="width: 18rem;">
+      <div class="signup-body p-0" style>
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">First name</p>
         <!-- <input type="text" v-model="first_name" class="signup-user-input" /> -->
         <b-form-input
           id="first-name"
           v-model="first_name"
-          v-validate="'required|email'"
+          type="text"
+          autocomplete="none"
           class="signup-user-input"
           placeholder
         ></b-form-input>
@@ -16,39 +17,40 @@
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">Last name</p>
         <b-form-input
           id="last-name"
+          type="text"
           v-model="last_name"
-          v-validate="'required|email'"
+          autocomplete="none"
           class="signup-user-input"
           placeholder
         ></b-form-input>
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">Password</p>
         <b-form-input
-          id="last-name"
+          id="password"
           v-model="password"
           type="password"
-          v-validate="'required|email'"
+          autocomplete="none"
           class="signup-user-input"
           placeholder
         ></b-form-input>
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">Email</p>
         <b-form-input
-          id="last-name"
+          id="email"
           v-model="email"
-          type
-          v-validate="'required|email'"
+          type="text"
+          autocomplete="none"
           class="signup-user-input"
           placeholder
         ></b-form-input>
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">Phone</p>
         <b-form-input
-          id="last-name"
+          id="phone"
           v-model="phone"
-          type
-          v-validate="'required|email'"
+          type="text"
+          autocomplete="none"
           class="signup-user-input"
           placeholder
         ></b-form-input>
-        <div class="row mt-2 w-100">
+        <div class="row mt-4 w-100">
           <mdb-btn type="submit" class="m-auto" size="sm" @click="signUp">SignUp</mdb-btn>
           <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
         </div>
@@ -141,6 +143,8 @@ export default {
   border-top-left-radius: 5%;
   border-bottom-right-radius: 5%;
   box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
+  width: 22rem;
+  background-color: transparent;
 }
 .signup-title {
   font-weight: 700;
@@ -151,7 +155,10 @@ export default {
   font-weight: 500;
   font-size: 18px;
 }
-
+.signup-body {
+  padding: 0;
+  width: 18rem;
+}
 input[type="text"] {
   background-color: transparent !important;
 }
@@ -179,5 +186,14 @@ input[type="password"] {
   font-size: 12px;
   /* margin-left: -10px; */
   color: red;
+}
+@media screen and (max-width: 1200px) {
+  .signup-body {
+    padding: 0;
+    width: 14rem;
+  }
+  .signup {
+    width: 18rem;
+  }
 }
 </style>

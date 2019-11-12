@@ -13,23 +13,27 @@
       style="background-color:#fff; zIndex:-1; position:fixed;"
       class="h-100 w-100"
     ></vue-particles>-->
-    <mdb-btn
-      type="submit"
-      size="sm"
-      color="primary"
-      id="switchLogin"
-      aria-controls="Login"
-      @click="switchLogin"
-    >{{switchButtonText}}</mdb-btn>
-    <div class="row p-0 m-0 auth-form">
-      <div class="col-12 p-0 m-0 form-switch">
-        <c-login class="col-6 p-0 m-0 ml-auto mr-5" @alertMsg="showAlert($event)" />
-        <c-signUp
-          class="col-6 p-0 m-0 ml-auto mr-5"
-          @switchLogin="switchLogin()"
-          @alertMsg="showAlert($event)"
-        />
-      </div>
+    <div class="row w-100 p-0 m-0">
+      <mdb-btn
+        type="submit"
+        size="sm"
+        color="info"
+        id="switchLogin"
+        aria-controls="Login"
+        class="switch-button"
+        @click="switchLogin"
+      >{{switchButtonText}}</mdb-btn>
+    </div>
+
+    <div class="row w-100 p-0 m-0 auth-form">
+      <!-- <div class="col-12 form-switch"> -->
+      <c-login class="col-md-4 col-sm-6 col-xs-2 ml-auto p-0" @alertMsg="showAlert($event)" />
+      <c-signUp
+        class="col-md-4 col-sm-6 col-xs-2 ml-auto p-0"
+        @switchLogin="switchLogin()"
+        @alertMsg="showAlert($event)"
+      />
+      <!-- </div> -->
     </div>
   </div>
 </template>
@@ -71,9 +75,6 @@ export default {
     };
   },
   created() {
-    // userDetail.login().then(res => {
-    //   console.log(res);
-    // });
     localStorage.clear();
   },
   methods: {
@@ -89,11 +90,15 @@ export default {
       if (this.switchButtonText === "login") {
         this.switchButtonText = "signup";
         $("#Signup").collapse("hide");
-        $("#Login").collapse("show");
+        setTimeout(() => {
+          $("#Login").collapse("show");
+        }, 350);
       } else if (this.switchButtonText === "signup") {
         this.switchButtonText = "login";
         $("#Login").collapse("hide");
-        $("#Signup").collapse("show");
+        setTimeout(() => {
+          $("#Signup").collapse("show");
+        }, 350);
       }
     }
   }
@@ -104,17 +109,21 @@ export default {
 .welcome-page {
   background-image: url("../assets/yellow-chart-with-pencil.jpg");
   background-size: cover;
-  background-position: center;
+  /* background-position: center; */
   background-attachment: fixed;
   background-color: #464646;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
+  /* min-width: 100vh; */
+  /* padding: 2rem;  */
 }
-.register {
-  margin-left: 500px;
+.switch-button {
+  position: absolute !important;
+  display: flex;
 }
-.form-switch {
-  height: auto !important;
+.auth-form {
+  /* display: flex; */
+  float: right !important;
   margin-top: 5rem !important;
 }
 </style>

@@ -1,37 +1,36 @@
 <template>
-  <div class="collapse login" style="width: 23rem; margin: auto;" id="Login">
-    <div class="p-4" style="width: 22rem; background-color:transparent">
-      <h1 class="row p-0 m-0 login-title">Login</h1>
-      <div class="login-card-body">
+  <div class="collapse" style="width: 23rem;" id="Login">
+    <div class="login p-4" style>
+      <h1 class="login-title">Login</h1>
+      <div class="login-card-body p-0" style>
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Email</p>
         <b-form-input
           id="name-formatter"
-          autocomplete="off"
+          type="text"
           v-model="email"
-          v-validate="'required|email'"
+          autocomplete="none"
           class="login-user-input"
-          placeholder="Enter your name"
         ></b-form-input>
         <p class="required-alert my-1">{{ errors.first('email') }}</p>
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Password</p>
         <b-form-input
           id="password-formatter"
-          v-model="passsword"
-          v-validate="'required|password'"
+          type="password"
+          v-model="password"
+          autocomplete="new-password"
           class="login-user-input"
-          placeholder="Enter your password"
         ></b-form-input>
         <p class="required-alert my-1">{{ errors.first('password') }}</p>
-        <label>
+        <div class="row mt-4 w-100">
           <mdb-btn
             type="submit"
             size="sm"
-            color="primary"
+            class="m-auto"
             @keypress="checkUser"
             @click="checkUser"
           >Login</mdb-btn>
-          <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
-        </label>
+          <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -100,6 +99,15 @@ export default {
 </script>
 
 <style scoped>
+.login {
+  border: 1px solid black;
+  /* border-right: 1px solid black; */
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
+  width: 22rem;
+  background-color: transparent;
+}
 .login-title {
   font-weight: 700;
   margin: auto !important;
@@ -107,6 +115,7 @@ export default {
 }
 .login-card-body {
   padding: 0;
+  width: 18rem;
 }
 .login-input-label {
   font-weight: 400;
@@ -150,10 +159,13 @@ input:-webkit-autofill:focus {
   font-size: 15px;
   color: red;
 }
-@media only screen and (max-width: 400px) {
+@media screen and (max-width: 1200px) {
+  .login-card-body {
+    padding: 0;
+    width: 14rem;
+  }
   .login {
-    margin-left: 30rem;
-    margin-top: 20rem;
+    width: 18rem;
   }
 }
 </style>
