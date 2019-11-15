@@ -7,17 +7,13 @@
   </div>
 </template>
 <script>
-import Nav from "./components/navbar/navbar.vue";
+const default_layout = "no-navbar";
 export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || default_layout) + "-layout";
     }
-  },
-  components: {
-    Nav
   }
 };
 </script>
-<style scoped>
-</style>
+<style scoped></style>

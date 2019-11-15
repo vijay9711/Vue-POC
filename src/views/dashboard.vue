@@ -3,6 +3,7 @@
     <div class="skew-background">
       <h1>Dashboard</h1>
     </div>
+    <div>{{params}}</div>
 
     <label class="loading less-than">&lt;</label>
     <label class="loading slash">/</label>
@@ -12,7 +13,6 @@
 <script>
 import Nav from "../components/navbar/navbar.vue";
 import axios from "axios";
-import URL from "../service/service";
 
 export default {
   components: {
@@ -21,13 +21,15 @@ export default {
   data: function() {
     return {
       username: localStorage.getItem("username"),
-      info: null
+      info: null,
+      params: []
     };
   },
-  mounted() {
-    axios.get("http://localhost:4000/data").then(response => {
-      this.info = response.data;
-    });
+  created() {
+    this.params = this.$route.params.id;
+    // axios.get("http://localhost:4000/data").then(response => {
+    //   this.info = response.data;
+    // });
   }
 };
 </script>

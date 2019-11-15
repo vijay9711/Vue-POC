@@ -61,7 +61,7 @@
 
 <script>
 import { mdbInput, mdbBtn } from "mdbvue";
-import { UserDetails } from "../../service/API/userdetail.js";
+import { UserDetails } from "../../service/userdetail.js";
 
 const userDetail = new UserDetails();
 export default {

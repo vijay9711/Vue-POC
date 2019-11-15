@@ -22,12 +22,17 @@
         aria-controls="Login"
         class="switch-button"
         @click="switchLogin"
-      >{{switchButtonText}}</mdb-btn>
+        >{{ switchButtonText }}</mdb-btn
+      >
+      <a href="http://localhost:3001/auth/google">Sign In with Google</a>
     </div>
 
     <div class="row w-100 p-0 m-0 auth-form">
       <!-- <div class="col-12 form-switch"> -->
-      <c-login class="col-md-4 col-sm-6 col-xs-2 ml-auto p-0" @alertMsg="showAlert($event)" />
+      <c-login
+        class="col-md-4 col-sm-6 col-xs-2 ml-auto p-0"
+        @alertMsg="showAlert($event)"
+      />
       <c-signUp
         class="col-md-4 col-sm-6 col-xs-2 ml-auto p-0"
         @switchLogin="switchLogin()"
@@ -41,7 +46,7 @@
 <script>
 import { mdbInput, mdbBtn } from "mdbvue";
 import { constants } from "crypto";
-import { UserDetails } from "../service/API/userdetail";
+import { UserDetails } from "../service/userdetail.js";
 import { setInterval, setImmediate, setTimeout } from "timers";
 import Particles from "vue-particles";
 import Alert from "../widget/Alert.vue";

@@ -48,30 +48,18 @@ const router = new Router({
       requiresAuth: true
     },
     {
-      path: "/dashboard",
+      path: "/dashboard:user",
       name: "dashboard",
       component: DashBoard,
       meta: {
         layout: "navbar",
-        guest: true,
-        requiresAuth: true
+        guest: false,
+        requiresAuth: false
       }
     }
   ]
 });
-// router.beforeEach((to, from, next) => {
-//   // if (to.fullPath === '/about') {
-//   //   if (localStorage.getItem("username")==="vijay") {
-//   //    this.$router.push("/about")
-//   //   }
-//   // }
-//   // if (to.fullPath === '/login') {
-//   //   if (localStorage.getItem("username")!=="vijay") {
-//   //     next('/');
-//   //   }
-//   // }
-//   next();
-// });
+
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAuth)) {
     console.log("require");

@@ -38,7 +38,7 @@
 
 <script>
 import { mdbInput, mdbBtn } from "mdbvue";
-import { UserDetails } from "../../service/API/userdetail.js";
+import { UserDetails } from "../../service/userdetail.js";
 import Alert from "../../widget/Alert.vue";
 
 const userDetail = new UserDetails();
