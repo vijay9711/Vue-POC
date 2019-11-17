@@ -1,7 +1,9 @@
 const User_details = require("../module/userDetails.js");
+const Cryptr = require("cryptr");
+const cryptr = new Cryptr("myTotalySecretKey");
+
 userLogin = (req, res) => {
   let data = req.body;
-  console.log(req.body);
   User_details.find(
     { email: data.email, password: data.password },
     (err, data) => {
@@ -9,10 +11,11 @@ userLogin = (req, res) => {
         throw err;
       } else {
         if (data.length !== 0) {
-          // res.send("access_granted")
+          // Encrypt user id using cryptr method
+          const encryptedUserId = cryptr.encrypt(data[0] && data[0]._id);
           res.json([
             {
-              id: data[0]._id,
+              id: encryptedUserId,
               access: "granted"
             }
           ]);

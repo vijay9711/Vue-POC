@@ -2,13 +2,12 @@
   <div id="nav" class="row border pb-0">
     <div class="col-10 nav">
       <router-link to="/dashboard">DashBoard</router-link>
-      <router-link to="/shoppingList">ShoppingList</router-link>
-      <router-link to="/about">About</router-link>
-      <router-link to="/support">support</router-link>
     </div>
 
     <div class="col-2">
-      <button class="btn btn-primary logout" @click.prevent="clearUserData">Logout</button>
+      <button class="btn btn-primary logout" @click.prevent="clearUserData">
+        Logout
+      </button>
     </div>
   </div>
 </template>

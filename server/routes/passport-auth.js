@@ -1,5 +1,7 @@
 var passport = require("passport");
 const URL = process.env.PORT || 3001;
+const Cryptr = require("cryptr");
+const cryptr = new Cryptr("myTotalySecretKey");
 module.exports = function(app) {
   app.get(
     "/auth/google",
@@ -11,8 +13,11 @@ module.exports = function(app) {
     "/auth/google/callback",
     passport.authenticate("google", { failureRedirect: "/" }),
     function(req, res) {
-      // console.log("what is red ", res);
-      res.redirect("/dashboard:", res.user);
+      const encryptedString = cryptr.encrypt(req.user.id);
+      console.log("what is red ", req);
+      res
+        .status(301)
+        .redirect(`http://localhost:8081/dashboard?id=${encryptedString}`);
     }
   );
 };

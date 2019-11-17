@@ -43,6 +43,7 @@ mongoose.connect(
 );
 require("./server/routes/index.js")(app);
 require("./server/routes/passport-auth.js")(app);
+require("./server/routes/socialUser.js")(app);
 app.get("/", (req, res) => {
   res.send("sending from back end");
 });

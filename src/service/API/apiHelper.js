@@ -10,4 +10,20 @@ export class Apihelper {
       }
     });
   }
+  get(uri) {
+    return axios
+      .get(`${URL}` + uri, {
+        headers: {
+          "content-Type": "application/json"
+        },
+        withCredentials: false
+      })
+      .then(res => {
+        // console.log(res);
+        return res;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  }
 }
