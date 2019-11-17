@@ -1,36 +1,36 @@
 <template>
-  <div class="collapse login" style="width: 23rem;" id="Login">
-    <div class="card m-auto p-3" style="width: 22rem;">
-      <h1 class="card-title">Login</h1>
-      <div class="card-body">
-        <p class="p-0 mb-0 float-left">Email</p>
-        <span class="required-alert">{{ errors.first('email') }}</span>
-        <input
+  <div class="collapse" style="width: 23rem;" id="Login">
+    <div class="login p-4" style>
+      <h1 class="login-title">Login</h1>
+      <div class="login-card-body p-0" style>
+        <p class="login-input-label p-0 mb-0 mt-1 float-left">Email</p>
+        <b-form-input
+          id="name-formatter"
           type="text"
           v-model="email"
-          v-validate="'required|email'"
-          name="email"
-          class="rounded border border-primary user-input"
-        />
-        <p class="p-0 mb-0 float-left">Password</p>
-        <span class="required-alert">{{ errors.first('password') }}</span>
-        <input
+          autocomplete="none"
+          class="login-user-input"
+        ></b-form-input>
+        <p class="required-alert my-1">{{ errors.first('email') }}</p>
+        <p class="login-input-label p-0 mb-0 mt-1 float-left">Password</p>
+        <b-form-input
+          id="password-formatter"
           type="password"
           v-model="password"
-          v-validate="'required'"
-          name="password"
-          class="rounded border border-primary user-input"
-        />
-        <label>
+          autocomplete="new-password"
+          class="login-user-input"
+        ></b-form-input>
+        <p class="required-alert my-1">{{ errors.first('password') }}</p>
+        <div class="row mt-4 w-100">
           <mdb-btn
             type="submit"
             size="sm"
-            color="primary"
+            class="m-auto"
             @keypress="checkUser"
             @click="checkUser"
           >Login</mdb-btn>
-          <mdb-btn type="button" size="sm" color="primary" @click="clearData">cancel</mdb-btn>
-        </label>
+          <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
+        </div>
       </div>
     </div>
   </div>
@@ -38,7 +38,7 @@
 
 <script>
 import { mdbInput, mdbBtn } from "mdbvue";
-import { UserDetails } from "../../service/API/userdetail.js";
+import { UserDetails } from "../../service/userdetail.js";
 import Alert from "../../widget/Alert.vue";
 
 const userDetail = new UserDetails();
@@ -64,6 +64,7 @@ export default {
         email: this.email,
         password: this.password
       };
+      console.log(data);
       if (this.email.length > 0 && this.password.length > 0) {
         userDetail.login(data).then(res => {
           if (res.data[0].access === "granted") {
@@ -98,20 +99,73 @@ export default {
 </script>
 
 <style scoped>
-.user-input {
-  padding-left: 0.5rem !important;
-  margin-bottom: 1rem;
-  width: 100%;
-}
-
 .login {
-  position: absolute;
-  margin-left: 60rem;
-  margin-top: 20rem;
+  border: 1px solid black;
+  /* border-right: 1px solid black; */
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
+  width: 22rem;
+  background-color: transparent;
+}
+.login-title {
+  font-weight: 700;
+  margin: auto !important;
+  margin-bottom: 1rem !important;
+}
+.login-card-body {
+  padding: 0;
+  width: 18rem;
+}
+.login-input-label {
+  font-weight: 400;
+  font-size: 20px;
+}
+input[type="text"] {
+  background: transparent !important;
+}
+input[type="password"] {
+  background: transparent !important;
+}
+.login-user-input::placeholder {
+  background-color: transparent;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-background-clip: yellow !important;
+  background-color: transparent !important;
+}
+.login-user-input {
+  width: 100%;
+  border: 0px !important;
+  border-bottom: 1px solid black !important;
+  padding-left: 0.5rem;
+  border-radius: 0px;
+}
+.login-user-input:focus {
+  box-shadow: none !important;
+  outline: none !important;
+}
+.login {
+  border: 1px solid black;
+  /* border-right: 1px solid black; */
+  border-top-left-radius: 5%;
+  border-bottom-right-radius: 5%;
+  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
 }
 
 .required-alert {
-  font-size: 12px;
+  font-size: 15px;
   color: red;
+}
+@media screen and (max-width: 1200px) {
+  .login-card-body {
+    padding: 0;
+    width: 14rem;
+  }
+  .login {
+    width: 18rem;
+  }
 }
 </style>

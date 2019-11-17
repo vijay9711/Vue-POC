@@ -1,43 +1,19 @@
 <template>
   <!-- <Nav></Nav> -->
-  <div id="app">
+  <div>
     <component :is="layout">
       <router-view />
     </component>
   </div>
 </template>
 <script>
-import Nav from "./components/navbar/navbar.vue";
+const default_layout = "no-navbar";
 export default {
   computed: {
     layout() {
       return (this.$route.meta.layout || default_layout) + "-layout";
     }
-  },
-  components: {
-    Nav
   }
 };
 </script>
-<style scoped>
-#app {
-  font-family: "Avenir", Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* text-align: center; */
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-}
-
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-</style>
+<style scoped></style>

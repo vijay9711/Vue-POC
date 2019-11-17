@@ -1,33 +1,38 @@
 <template>
   <div class="about">
-    <div class="skew-background">
-      <h1>Dashboard</h1>
-    </div>
-
-    <label class="loading less-than">&lt;</label>
-    <label class="loading slash">/</label>
-    <label class="loading greater-than">&gt;</label>
+    <h1>Dashboard</h1>
+    <p>{{userData}}</p>
   </div>
 </template>
 <script>
-import Nav from "../components/navbar/navbar.vue";
-import axios from "axios";
-import URL from "../service/service";
+import { SocialUserService } from "../service/socialUserService.js";
 
+const socialUserService = new SocialUserService();
 export default {
-  components: {
-    Nav
-  },
-  data: function() {
+  data() {
     return {
       username: localStorage.getItem("username"),
-      info: null
+      info: null,
+      params: [],
+      userData: ""
     };
   },
-  mounted() {
-    axios.get("http://localhost:4000/data").then(response => {
-      this.info = response.data;
+  // mounted() {
+  //   console.log("im vijay");
+  // }
+  created() {
+    console.log(this.$route.query.id);
+    this.params = this.$route.query.id;
+    socialUserService.getSocialUserDetails(this.params).then(res => {
+      console.log(res);
+      if (res.status === 200) {
+        this.userData = res.data[0];
+        localStorage.setItem("social_userId", res.data[0].id);
+      }
     });
+    // axios.get("http://localhost:4000/data").then(response => {
+    //   this.info = response.data;
+    // });
   }
 };
 </script>
