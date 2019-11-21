@@ -25,13 +25,23 @@
             :buttonClass="'px-2 py-1 my-3'"
             @buttonClicked="switchLogin"
           />
-          <div class="p-2 mb-2 text-center google-sign-up" @click="googleSignIn()">
+          <div
+            class="p-2 mb-2 text-center google-sign-up"
+            @click="googleSignIn()"
+          >
             <img src="@/assets/googleSignIn.png" class="google-img" />
-            <a id="googleSignIn" class="p-0" href="http://localhost:3001/auth/google">Google</a>
+            <a
+              id="googleSignIn"
+              class="p-0"
+              href="https://shielded-garden-86694.herokuapp.com/auth/google"
+              >Google</a
+            >
           </div>
         </div>
       </div>
-      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-4 card-cont">
+      <div
+        class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-4 card-cont"
+      >
         <c-login class @alertMsg="showAlert($event)" />
         <c-signUp @switchLogin="switchLogin()" @alertMsg="showAlert($event)" />
       </div>

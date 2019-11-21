@@ -1,7 +1,7 @@
 <template>
   <div class="about">
     <h1>Dashboard</h1>
-    <p>{{userData}}</p>
+    <p>{{ userData }}</p>
   </div>
 </template>
 <script>
@@ -22,14 +22,14 @@ export default {
   // }
   created() {
     console.log(this.$route.query.id);
-    this.params = this.$route.query.id;
-    socialUserService.getSocialUserDetails(this.params).then(res => {
-      console.log(res);
-      if (res.status === 200) {
-        this.userData = res.data[0];
-        localStorage.setItem("social_userId", res.data[0].id);
-      }
-    });
+    // this.params = this.$route.query.id;
+    // socialUserService.getSocialUserDetails(this.params).then(res => {
+    //   console.log(res);
+    //   if (res.status === 200) {
+    //     this.userData = res.data[0];
+    //     localStorage.setItem("social_userId", res.data[0].id);
+    //   }
+    // });
     // axios.get("http://localhost:4000/data").then(response => {
     //   this.info = response.data;
     // });

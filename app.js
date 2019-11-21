@@ -7,7 +7,7 @@ const app = express();
 
 const port = process.env.PORT || 3002;
 
-app.use("/", serveStatic(path.join(__dirname, "/dist")));
+app.use("/", serveStatic(path.join(__dirname, "/dist/")));
 app.use(serveStatic(__dirname + "/dist"));
 
 app.listen(port, () => {

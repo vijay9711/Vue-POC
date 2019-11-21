@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://localhost:3001";
+const URL = "http://shielded-garden-86694.herokuapp.com";
 
 export class Apihelper {
   post(uri, data) {
