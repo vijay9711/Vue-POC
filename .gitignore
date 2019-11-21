@@ -4,6 +4,7 @@ node_modules
 package-lock.json
 # local env files
 #.env.local
+.env.dev
 .env.*.local
 
 # Log files

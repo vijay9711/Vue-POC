@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const URL = "http://shielded-garden-86694.herokuapp.com";
+const URL = process.env.VUE_APP_SERVER_URL;
 
 export class Apihelper {
   post(uri, data) {

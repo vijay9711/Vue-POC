@@ -30,12 +30,7 @@
             @click="googleSignIn()"
           >
             <img src="@/assets/googleSignIn.png" class="google-img" />
-            <a
-              id="googleSignIn"
-              class="p-0"
-              href="https://shielded-garden-86694.herokuapp.com/auth/google"
-              >Google</a
-            >
+            <a id="googleSignIn" class="p-0" :href="googleURL">Google</a>
           </div>
         </div>
       </div>
@@ -85,11 +80,13 @@ export default {
       alertType: "",
       switch: true,
       alert: false,
-      switchButtonText: "login"
+      switchButtonText: "login",
+      googleURL: process.env.VUE_APP_SERVER_URL + "/auth/google"
     };
   },
   created() {
     localStorage.clear();
+    console.log(this.googleURL);
   },
   methods: {
     googleSignIn() {
