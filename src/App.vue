@@ -1,19 +1,10 @@
 <template>
   <!-- <Nav></Nav> -->
   <div>
-    <component :is="layout">
-      <router-view />
-    </component>
+    <router-view />
   </div>
 </template>
 <script>
-const default_layout = "no-navbar";
-export default {
-  computed: {
-    layout() {
-      return (this.$route.meta.layout || default_layout) + "-layout";
-    }
-  }
-};
+export default {};
 </script>
 <style scoped></style>
