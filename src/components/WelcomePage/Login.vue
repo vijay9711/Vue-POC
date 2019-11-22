@@ -11,7 +11,7 @@
           autocomplete="none"
           class="login-user-input"
         ></b-form-input>
-        <p class="required-alert my-1">{{ errors.first('email') }}</p>
+        <p class="required-alert my-1">{{ errors.first("email") }}</p>
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Password</p>
         <b-form-input
           id="password-formatter"
@@ -20,7 +20,7 @@
           autocomplete="new-password"
           class="login-user-input"
         ></b-form-input>
-        <p class="required-alert my-1">{{ errors.first('password') }}</p>
+        <p class="required-alert my-1">{{ errors.first("password") }}</p>
         <div class="row mt-4 w-100">
           <mdb-btn
             type="submit"
@@ -28,7 +28,8 @@
             class="m-auto"
             @keypress="checkUser"
             @click="checkUser"
-          >Login</mdb-btn>
+            >Login</mdb-btn
+          >
           <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
         </div>
       </div>
@@ -68,7 +69,7 @@ export default {
       if (this.email.length > 0 && this.password.length > 0) {
         userDetail.login(data).then(res => {
           if (res.data[0].access === "granted") {
-            localStorage.setItem("user_id", res.data[0].id + "a02");
+            localStorage.setItem("user_id", res.data[0].id);
             this.$router.push({ name: "dashboard" });
           } else if (res.data[0].access === "denied") {
             this.password = "";
