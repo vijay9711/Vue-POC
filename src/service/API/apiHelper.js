@@ -19,8 +19,8 @@ export class Apihelper {
         withCredentials: false
       })
       .then(res => {
-        // console.log(res);
-        return res;
+        var data = res;
+        return data;
       })
       .catch(e => {
         console.log(e);

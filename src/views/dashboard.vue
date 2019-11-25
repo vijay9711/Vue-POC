@@ -1,17 +1,23 @@
-<template> <h1>hello im dashboard</h1></template>
+<template>
+  <div>
+    <About />
+  </div>
+</template>
 <script>
 import { SocialUserService } from "../service/socialUserService.js";
 import { UserDetails } from "../service/userdetail.js";
-
+import About from "./About.vue";
 const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
 export default {
+  components: {
+    About
+  },
   data() {
     return {
-      username: localStorage.getItem("username"),
       info: null,
       params: [],
-      userData: ""
+      userData: []
     };
   },
   created() {
@@ -32,9 +38,13 @@ export default {
   methods: {
     getUserDetails() {
       let userID = localStorage.getItem("user_id");
-      // userDetails.getUser(userID).then(res => {
-      //   // console.log(res);
-      // });
+      userDetails.getUser(userID).then(res => {
+        this.userData = res.data[0];
+        if (this.userData.status.Status === 200) {
+          console.log(res.data[0].data);
+          this.userData = res.data[0].data;
+        }
+      });
     }
   }
 };

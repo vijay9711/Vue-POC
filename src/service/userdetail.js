@@ -13,7 +13,7 @@ export class UserDetails {
     return apiHelper.post(uri, data);
   }
   getUser(data) {
-    const uri = `/getUser/userID=${data}`;
+    const uri = `/getUser/${data}`;
     return apiHelper.get(uri);
   }
 }
