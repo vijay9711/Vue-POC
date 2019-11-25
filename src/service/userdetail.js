@@ -5,11 +5,15 @@ const apiHelper = new Apihelper();
 export class UserDetails {
   constructor() {}
   login(data) {
-    const uri = "/index";
+    const uri = "/login";
     return apiHelper.post(uri, data);
   }
   signUp(data) {
-    const uri = "/login";
+    const uri = "/signUp";
     return apiHelper.post(uri, data);
+  }
+  getUser(data) {
+    const uri = `/getUser/userID=${data}`;
+    return apiHelper.get(uri);
   }
 }

@@ -1,12 +1,9 @@
-<template>
-  <div class="about">
-    <h1>Dashboard</h1>
-    <p>{{ userData }}</p>
-  </div>
-</template>
+<template> <h1>hello im dashboard</h1></template>
 <script>
 import { SocialUserService } from "../service/socialUserService.js";
+import { UserDetails } from "../service/userdetail.js";
 
+const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
 export default {
   data() {
@@ -17,11 +14,9 @@ export default {
       userData: ""
     };
   },
-  // mounted() {
-  //   console.log("im vijay");
-  // }
   created() {
-    console.log(this.$route.query.id);
+    // console.log(this.$route.query.id);
+    this.getUserDetails();
     // this.params = this.$route.query.id;
     // socialUserService.getSocialUserDetails(this.params).then(res => {
     //   console.log(res);
@@ -33,6 +28,14 @@ export default {
     // axios.get("http://localhost:4000/data").then(response => {
     //   this.info = response.data;
     // });
+  },
+  methods: {
+    getUserDetails() {
+      let userID = localStorage.getItem("user_id");
+      // userDetails.getUser(userID).then(res => {
+      //   // console.log(res);
+      // });
+    }
   }
 };
 </script>
