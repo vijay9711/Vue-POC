@@ -1,7 +1,10 @@
 <template>
   <div class="collapse" style="width: 23rem;" id="Signup">
     <div class="col-xs-2 signup p-4" style>
-      <h1 class="signup-title">SignUp</h1>
+      <div style="overflow:hidden;display: flex;">
+        <h1 class="signup-title">SignUp</h1>
+        <div class="title-skew"></div>
+      </div>
       <div class="signup-body p-0" style>
         <p class="signup-input-label p-0 mb-0 mt-1 float-left">First name</p>
         <!-- <input type="text" v-model="first_name" class="signup-user-input" /> -->
@@ -50,11 +53,23 @@
           class="signup-user-input"
           placeholder
         ></b-form-input>
-        <div class="row mt-4 w-100">
-          <mdb-btn type="submit" class="m-auto" size="sm" @click="signUp"
+        <div class="row mt-4">
+          <mdb-btn
+            type="submit"
+            class="m-auto signin-button"
+            color="info"
+            size="sm"
+            @click="signUp"
             >SignUp</mdb-btn
           >
-          <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
+          <mdb-btn
+            type="button"
+            class="m-auto signin-button"
+            size="sm"
+            color="info"
+            @click="clearData"
+            >cancel</mdb-btn
+          >
         </div>
       </div>
     </div>
@@ -150,9 +165,20 @@ export default {
 }
 .signup-title {
   font-weight: 700;
-  margin: auto !important;
   margin-bottom: 1rem !important;
   color: teal;
+}
+.title-skew {
+  background-color: #17a2b8;
+
+  transform: skew(30deg, 0deg);
+  margin-left: 5%;
+  height: 40px;
+  width: 100%;
+  padding-left: 15rem;
+  /* margin-bottom: 1rem; */
+  /* border-radius: 25%; */
+  /* border-bottom-right-radius: 100%; */
 }
 .signup-input-label {
   font-weight: 500;
@@ -168,6 +194,9 @@ input[type="text"] {
 }
 input[type="password"] {
   background-color: transparent !important;
+}
+.signin-button {
+  width: 8rem;
 }
 .signup-user-input {
   width: 100%;
@@ -198,6 +227,9 @@ input[type="password"] {
   }
   .signup {
     width: 18rem;
+  }
+  .signin-button {
+    width: 5rem;
   }
 }
 </style>

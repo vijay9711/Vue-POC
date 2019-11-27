@@ -35,7 +35,7 @@
         </div>
       </div>
       <div
-        class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-4 card-cont"
+        class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-3 card-cont"
       >
         <c-login class @alertMsg="showAlert($event)" />
         <c-signUp @switchLogin="switchLogin()" @alertMsg="showAlert($event)" />
@@ -137,11 +137,12 @@ export default {
 }
 .google-sign-up {
   height: 2.5rem;
-  background: #4285f4;
+  background: #17a2b8;
   border: transparent;
   border-radius: 5px;
   cursor: pointer;
   min-width: 8rem;
+  font-weight: 500;
   box-shadow: 6px 7px 16px 0px rgba(0, 0, 0, 0.75);
 }
 .google-sign-up a {
@@ -170,9 +171,14 @@ export default {
     padding: 0% !important; */
   }
 }
-@media only screen and (max-width: 370px) {
+@media only screen and (max-width: 375px) {
   .card-cont {
     margin-left: -3rem !important;
+  }
+}
+@media only screen and (max-width: 320px) {
+  .card-cont {
+    margin-left: -4.5rem !important;
   }
 }
 </style>

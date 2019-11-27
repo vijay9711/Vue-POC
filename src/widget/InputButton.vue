@@ -24,7 +24,7 @@ export default {
         case "Add_Selected":
           return "background-color:#eeaa37; border:1px solid #eeaa37; border-radius: 4px; color:#ffff;width:120px;";
         case "login":
-          return "background: #17a2b8; text-transform: capitalize; border:transparent;height:2.5rem; min-width: 8rem; border-radius: 5px; color:black;; color:#fff;box-shadow: 6px 7px 16px 0px rgba(0,0,0,0.75);";
+          return "background: #17a2b8; text-transform: capitalize; border:transparent;height:2.5rem; min-width: 8rem; border-radius: 5px;  color:#fff;box-shadow: 6px 7px 16px 0px rgba(0,0,0,0.75);";
         default:
           return "background: #ffff;border-color: #eeaa37;border: 1px solid;border-radius: 0px;color: #eeaa37;";
       }

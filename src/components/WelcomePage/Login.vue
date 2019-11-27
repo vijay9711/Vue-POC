@@ -1,7 +1,7 @@
 <template>
   <div class="collapse" style="width: 23rem;" id="Login">
     <div class="login p-4">
-      <div style="overflow:hidden;    display: flex;">
+      <div style="overflow:hidden;display: flex;">
         <h1 class="login-title">Login</h1>
         <div class="title-skew"></div>
       </div>
@@ -24,7 +24,7 @@
           class="login-user-input"
         ></b-form-input>
         <p class="required-alert my-1">{{ errors.first("password") }}</p>
-        <div class="row p-0 m-0 mt-4">
+        <div class="row  mt-4">
           <mdb-btn
             type="submit"
             size="sm"
@@ -147,20 +147,8 @@ export default {
   font-weight: 400;
   font-size: 20px;
 }
-input[type="text"] {
-  background: transparent !important;
-}
-input[type="password"] {
-  background: transparent !important;
-}
 .login-user-input::placeholder {
   background-color: transparent;
-}
-input:-webkit-autofill,
-input:-webkit-autofill:hover,
-input:-webkit-autofill:focus {
-  -webkit-background-clip: yellow !important;
-  background-color: transparent !important;
 }
 .login-user-input {
   width: 100%;
