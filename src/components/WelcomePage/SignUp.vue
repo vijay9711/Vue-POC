@@ -51,7 +51,9 @@
           placeholder
         ></b-form-input>
         <div class="row mt-4 w-100">
-          <mdb-btn type="submit" class="m-auto" size="sm" @click="signUp">SignUp</mdb-btn>
+          <mdb-btn type="submit" class="m-auto" size="sm" @click="signUp"
+            >SignUp</mdb-btn
+          >
           <mdb-btn type="button" size="sm" @click="clearData">cancel</mdb-btn>
         </div>
       </div>
@@ -138,18 +140,19 @@ export default {
 
 <style scoped>
 .signup {
-  border: 1px solid black;
+  border: none;
   /* border-right: 1px solid black; */
   border-top-left-radius: 5%;
   border-bottom-right-radius: 5%;
   box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
   width: 22rem;
-  background-color: transparent;
+  background-color: #fff;
 }
 .signup-title {
   font-weight: 700;
   margin: auto !important;
   margin-bottom: 1rem !important;
+  color: teal;
 }
 .signup-input-label {
   font-weight: 500;
@@ -158,6 +161,7 @@ export default {
 .signup-body {
   padding: 0;
   width: 18rem;
+  color: teal;
 }
 input[type="text"] {
   background-color: transparent !important;
@@ -168,7 +172,7 @@ input[type="password"] {
 .signup-user-input {
   width: 100%;
   border: 0px !important;
-  border-bottom: 1px solid black !important;
+  border-bottom: 1px solid #17a2b8 !important;
   padding-left: 0.5rem;
   margin-bottom: 0.5rem;
   border-radius: 0;

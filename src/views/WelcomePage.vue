@@ -124,7 +124,7 @@ export default {
   margin: auto;
 }
 .welcome-page {
-  background-image: url("../assets/yellow-chart-with-pencil.jpg");
+  background-image: url("../assets/mac_with_glass.jpg");
   /* background: #fff; */
   background-size: cover;
   background-position: center;
@@ -163,7 +163,7 @@ export default {
   .auth-form {
     width: 100% !important;
     /* padding: 0 !important; */
-    border: 1px solid #4285f4 !important;
+    /* border: 1px solid #4285f4 !important; */
     text-align: -webkit-center;
 
     /* margin: 0% !important;

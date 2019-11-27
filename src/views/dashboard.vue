@@ -1,17 +1,20 @@
 <template>
   <div>
+    <Nav />
     <About />
   </div>
 </template>
 <script>
 import { SocialUserService } from "../service/socialUserService.js";
 import { UserDetails } from "../service/userdetail.js";
+import Nav from "../components/navbar/navbar.vue";
 import About from "./About.vue";
 const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
 export default {
   components: {
-    About
+    About,
+    Nav
   },
   data() {
     return {
