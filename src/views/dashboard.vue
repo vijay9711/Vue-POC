@@ -1,7 +1,19 @@
 <template>
-  <div>
-    <Nav />
-    <About />
+  <div id="dashboard" class="dashboard">
+    <div id="navbar" class="position-fixed">
+      <Nav class="nav-bar" ref="sidebar" @selectedItem="scrollToItem($event)" />
+    </div>
+    <div
+      class="w3-overlay w3-animate-opacity"
+      @click="w3_close()"
+      style="cursor:pointer; z-index:0;"
+      id="myOverlay"
+    ></div>
+    <div id="dashboard-content" class="dashboard-content">
+      <Home id="home" />
+      <About id="about" />
+      <projects id="projects" />
+    </div>
   </div>
 </template>
 <script>
@@ -9,12 +21,24 @@ import { SocialUserService } from "../service/socialUserService.js";
 import { UserDetails } from "../service/userdetail.js";
 import Nav from "../components/navbar/navbar.vue";
 import About from "./About.vue";
+import Home from "./Home.vue";
+import Projects from "./Projects.vue";
+import "../js/dashboard.js";
+import $ from "jquery";
+
 const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
+$(window).on("scroll", function() {
+  let height = document.getElementById("#dashboard-content");
+  console.log(height);
+  // check_if_in_view(height)
+});
 export default {
   components: {
     About,
-    Nav
+    Nav,
+    Home,
+    Projects
   },
   data() {
     return {
@@ -25,17 +49,37 @@ export default {
   },
   created() {
     // console.log(this.$route.query.id);
-    this.getUserDetails();
-    this.socialUser();
+    const user_id = localStorage.getItem("user_id");
+    if (user_id) {
+      console.log("userid ");
+      this.getUserDetails();
+    } else if (this.$route.query.id) {
+      console.log("query is");
+      this.socialUser();
+    } else {
+      console.log("no token");
+      this.$router.push({ name: "Authentication" });
+    }
     console.log(this.$route.query.id);
   },
   methods: {
+    w3_close() {
+      document.getElementById("mySidenav").style.width = "50px";
+      document.getElementById("myOverlay").style.display = "none";
+    },
+    scrollToItem(event) {
+      console.log(event);
+      var elmnt = document.getElementById(event);
+      elmnt.scrollIntoView();
+    },
+    openSidebar() {
+      this.$refs.sidebar.openNav();
+    },
     socialUser() {
       this.params = this.$route.query.id;
       socialUserService.getSocialUserDetails(this.params).then(res => {
-        console.log(res);
-        if (res.status === 200) {
-          this.userData = res.data[0];
+        if (res.statusText === "OK") {
+          this.userData.push(res.data[0]);
           localStorage.setItem("user_id", this.params);
         }
       });
@@ -45,7 +89,6 @@ export default {
       userDetails.getUser(userID).then(res => {
         this.userData = res.data[0];
         if (this.userData.status.Status === 200) {
-          console.log(res.data[0].data);
           this.userData = res.data[0].data;
         }
       });
@@ -53,66 +96,31 @@ export default {
   }
 };
 </script>
-<style scoped>
-.skew-background {
-  background-color: #42b987;
-  margin: auto;
-}
-.loading {
-  font-size: 120px;
-}
-.less-than {
-  animation: spinleft 0.5s linear;
-  animation-iteration-count: 1;
-}
-.greater-than {
-  animation: spinright 0.5s linear;
-  animation-iteration-count: 1;
-}
-.slash {
-  animation: slash 0.5s linear;
-  animation-iteration-count: 1;
-  color: teal;
-}
-@keyframes slash {
-  0% {
-    opacity: 0;
+<style lang="scss" scoped>
+.dashboard {
+  background: #f7f8fc;
+  height: 100vh;
+  overflow: scroll;
+  overflow-x: hidden;
+  overflow: -moz-scrollbars-none !important;
+  -ms-overflow-style: none !important;
+  #navbar {
+    z-index: 5 !important;
   }
-  50% {
-    opacity: 0.5;
+  .dashboard-content {
+    text-align: center;
   }
-  100% {
-    opacity: 1;
+  .nav-class {
+    display: none;
   }
 }
-@keyframes spinleft {
-  0% {
-    opacity: 0;
-    margin-left: -20px;
-  }
-  50% {
-    -webkit-transform: rotate(180deg);
-    transform: rotate(180deg);
-    opacity: 0.5;
-    margin-left: 0px;
-  }
-  100% {
-    -webkit-transform: rotate(360deg);
-    transform: rotate(360deg);
-  }
+.dashboard::-webkit-scrollbar {
+  display: none !important;
+  width: 0px !important;
+  background: transparent;
 }
-@keyframes spinright {
-  0% {
-    opacity: 0;
-    margin-right: -20px;
-  }
-  50% {
-    opacity: 0.5;
-    margin-right: 0px;
-  }
-  100% {
-    -webkit-transform: rotate(-360deg);
-    transform: rotate(-360deg);
-  }
+.animation-element {
+  color: red;
+  font-size: 20px;
 }
 </style>

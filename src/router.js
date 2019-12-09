@@ -10,14 +10,14 @@ const router = new Router({
       path: "/",
       name: "Authentication",
       component: () => import("./views/WelcomePage.vue"),
-      meta: {
-        layout: "no-navbar"
-      }
     },
     {
       path: "/dashboard",
       name: "dashboard",
-      component: () => import("./views/dashboard.vue")
+      component: () => import("./views/dashboard.vue"),
+      meta: {
+        layout: "navbar"
+      }
     }
   ]
 });
