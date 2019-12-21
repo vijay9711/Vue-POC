@@ -2,17 +2,12 @@
   <div class="home">
     <div class="row  m-0 professional-img">
       <!-- <div class="horz-card"> -->
-      <div class="col-12 my-auto">
+      <div class="col-md-12 my-auto">
         <div class="vert-card row m-auto">
-          <div class="col-3 m-0 p-0 pr-0 ">
-            <img class="my-image" src="@/assets/home/Me.jpg" alt="me" />
-          </div>
-
-          <div class="col-8  m-0">
+          <div class="col-9">
             <h1>
               Hi, I'm
             </h1>
-
             <label class="my-name">Vijay</label>
             <p class="abstract">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Magni
@@ -78,29 +73,26 @@ export default {
   border-radius: 5px;
   left: auto;
   width: auto;
-  min-height: 16rem;
+  min-height: auto;
+  max-height: auto;
   max-width: 80rem;
   text-align: left;
+  display: flex;
+  justify-content: flex-start;
   animation: about-me-box-anime 1s ease-in 1;
   -webkit-box-shadow: 14px 20px 32px -6px rgba(0, 0, 0, 0.21);
   -moz-box-shadow: 14px 20px 32px -6px rgba(0, 0, 0, 0.21);
   box-shadow: 14px 20px 32px -6px rgba(0, 0, 0, 0.21);
 
-  h1 {
-    font-family: "Montserrat";
-    font-style: "Extra-Light";
-  }
   .my-name {
     font-size: 42px;
     font-weight: bold;
   }
-  .abstract {
-    font-size: 20px;
-    font-family: monospace;
-  }
-  .col-8 {
+  .col-9 {
     // position: absolute;
     h1 {
+      font-family: "Montserrat";
+      font-style: "Extra-Light";
       animation: abstract-anime 1s ease-in 1;
     }
     label {
@@ -108,6 +100,8 @@ export default {
     }
     .abstract {
       // position: absolute;
+      font-size: 20px;
+      font-family: monospace;
       animation: abstract-anime 2.5s ease-in 1;
     }
   }

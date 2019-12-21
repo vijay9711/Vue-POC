@@ -1,15 +1,7 @@
 <template>
-  <div id="dashboard" class="dashboard">
-    <div id="navbar" class="position-fixed">
-      <Nav class="nav-bar" ref="sidebar" @selectedItem="scrollToItem($event)" />
-    </div>
-    <div
-      class="w3-overlay w3-animate-opacity"
-      @click="w3_close()"
-      style="cursor:pointer; z-index:0;"
-      id="myOverlay"
-    ></div>
-    <div id="dashboard-content" class="dashboard-content">
+  <div>
+    <Nav ref="sidebar" @selectedItem="scrollToItem($event)" />
+    <div id="dashboard-content" class="dashboard-content dashboard">
       <Home id="home" />
       <About id="about" />
       <projects id="projects" />
@@ -63,18 +55,6 @@ export default {
     console.log(this.$route.query.id);
   },
   methods: {
-    w3_close() {
-      document.getElementById("mySidenav").style.width = "50px";
-      document.getElementById("myOverlay").style.display = "none";
-    },
-    scrollToItem(event) {
-      console.log(event);
-      var elmnt = document.getElementById(event);
-      elmnt.scrollIntoView();
-    },
-    openSidebar() {
-      this.$refs.sidebar.openNav();
-    },
     socialUser() {
       this.params = this.$route.query.id;
       socialUserService.getSocialUserDetails(this.params).then(res => {
@@ -109,9 +89,6 @@ export default {
   }
   .dashboard-content {
     text-align: center;
-  }
-  .nav-class {
-    display: none;
   }
 }
 .dashboard::-webkit-scrollbar {

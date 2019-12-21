@@ -30,6 +30,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth": "^2.0.0",
     "path": "^0.12.7",
+    "scss": "^0.2.4",
     "serve-static": "^1.14.1",
     "vee-validate": "^2.2.13",
     "vue": "^2.6.10",
@@ -39,7 +40,7 @@
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
     "@vue/cli-plugin-eslint": "^3.8.0",
-    "@vue/cli-service": "^3.8.0",
+    "@vue/cli-service": "^4.1.1",
     "babel-eslint": "^10.0.1",
     "dotenv": "^8.0.0",
     "eslint": "^5.16.0",
@@ -58,7 +59,23 @@
       "plugin:vue/essential",
       "eslint:recommended"
     ],
-    "rules": {},
+    "rules": {
+      "no-console": [
+        "off"
+      ],
+      "no-debugger": [
+        "off"
+      ],
+      "no-unused-vars": [
+        "off"
+      ],
+      "vue/no-unused-components": [
+        "error",
+        {
+          "ignoreWhenBindingPresent": true
+        }
+      ]
+    },
     "parserOptions": {
       "parser": "babel-eslint"
     }

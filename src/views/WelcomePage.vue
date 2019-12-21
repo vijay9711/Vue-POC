@@ -1,21 +1,8 @@
 <template>
   <div class="welcome-page">
     <w-alert :alertText="alertMessage" :getType="alertType" v-if="alert" />
-    <!-- <vue-particles
-      color="#007bff"
-      linesColor="#000000"
-      :particlesNumber="100"
-      :linesWidth="1"
-      :lineOpacity="0.4"
-      :moveSpeed="5"
-      hoverMode="grab"
-      clickMode="repulse"
-      style="background-color:#fff; zIndex:-1; position:fixed;"
-      class="h-100 w-100"
-    ></vue-particles>-->
 
     <div class="row w-50 p-5 m-auto auth-form">
-      <!-- <div class="col-12 form-switch"> -->
       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 login-block">
         <div class="w-50 m-auto inline-block">
           <w-button
@@ -25,44 +12,39 @@
             :buttonClass="'px-2 py-1 my-3'"
             @buttonClicked="switchLogin"
           />
-          <div
-            class="p-2 mb-2 text-center google-sign-up"
-            @click="googleSignIn()"
-          >
+          <div class="p-2 mb-2 text-center google-sign-up" @click="googleSignIn()">
             <img src="@/assets/googleSignIn.png" class="google-img" />
             <a id="googleSignIn" class="p-0" :href="googleURL">Google</a>
           </div>
         </div>
       </div>
-      <div
-        class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-3 card-cont"
-      >
-        <c-login class @alertMsg="showAlert($event)" />
-        <c-signUp @switchLogin="switchLogin()" @alertMsg="showAlert($event)" />
+      <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 m-auto pt-3 card-cont">
+        <c-login
+          :class="modalToggle?'modal-slide login-block':'modal-close hide-modal'"
+          @alertMsg="showAlert($event)"
+        />
+        <c-signUp
+          :class="!modalToggle?'modal-slide login-block':'modal-close hide-modal'"
+          @switchLogin="switchLogin()"
+          @alertMsg="showAlert($event)"
+        />
       </div>
-
-      <!-- </div> -->
     </div>
   </div>
 </template>
 <script>
-import { mdbInput, mdbBtn } from "mdbvue";
-import { constants } from "crypto";
 import { UserDetails } from "../service/userdetail.js";
 import { setInterval, setImmediate, setTimeout } from "timers";
-import Particles from "vue-particles";
 import Alert from "../widget/Alert.vue";
 import Login from "../components/WelcomePage/Login.vue";
 import SignUp from "../components/WelcomePage/SignUp.vue";
 import InputButton from "../widget/InputButton.vue";
 // import router from "../router.js";
+import $ from "jquery";
 
 const userDetail = new UserDetails();
 export default {
   components: {
-    "mdb-input": mdbInput,
-    "mdb-btn": mdbBtn,
-    "w-particles": Particles,
     "w-alert": Alert,
     "c-login": Login,
     "c-signUp": SignUp,
@@ -80,13 +62,14 @@ export default {
       alertType: "",
       switch: true,
       alert: false,
-      switchButtonText: "login",
+      modalToggle: true,
+      switchButtonText: "signup",
       googleURL: process.env.VUE_APP_SERVER_URL + "/auth/google"
     };
   },
   created() {
     localStorage.clear();
-    console.log(this.googleURL);
+    console.log(this.modalToggle);
   },
   methods: {
     googleSignIn() {
@@ -101,18 +84,14 @@ export default {
       }, 3000);
     },
     switchLogin() {
-      if (this.switchButtonText === "login") {
+      if (!this.modalToggle) {
         this.switchButtonText = "signup";
-        $("#Signup").collapse("hide");
-        setTimeout(() => {
-          $("#Login").collapse("show");
-        }, 350);
-      } else if (this.switchButtonText === "signup") {
+        this.modalToggle = true;
+        console.log(this.modalToggle);
+      } else if (this.modalToggle) {
         this.switchButtonText = "login";
-        $("#Login").collapse("hide");
-        setTimeout(() => {
-          $("#Signup").collapse("show");
-        }, 350);
+        this.modalToggle = false;
+        console.log(this.modalToggle);
       }
     }
   }
@@ -124,20 +103,17 @@ export default {
   margin: auto;
 }
 .welcome-page {
-  background-image: url("../assets/mac_with_glass.jpg");
-  /* background: #fff; */
+  background-image: url("../assets/Welcome/adobethree.jpg");
   background-size: cover;
   background-position: center;
-  /* background-attachment: fixed; */
+  background-attachment: fixed;
   background-repeat: no-repeat;
   min-height: 100vh;
   overflow: hidden;
-  /* min-width: 100vh; */
-  /* padding: 2rem;  */
 }
 .google-sign-up {
   height: 2.5rem;
-  background: #17a2b8;
+  background: #fff;
   border: transparent;
   border-radius: 5px;
   cursor: pointer;
@@ -146,7 +122,7 @@ export default {
   box-shadow: 6px 7px 16px 0px rgba(0, 0, 0, 0.75);
 }
 .google-sign-up a {
-  color: #fff;
+  color: #17a2b8;
   min-width: 8rem;
 }
 .google-sign-up a:hover {
@@ -160,6 +136,41 @@ export default {
 .auth-form {
   margin-top: 5rem !important;
 }
+.modal-close {
+  animation: slideToleft 0.5s linear;
+  display: none;
+}
+.modal-slide {
+  animation: slideFromRight 0.3s ease-in;
+}
+@keyframes slideToleft {
+  0% {
+    transform: translateY(-0px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-15px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 0;
+  }
+}
+@keyframes slideFromRight {
+  0% {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(15px);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
 @media only screen and (max-width: 995px) {
   .auth-form {
     width: 100% !important;
@@ -170,15 +181,57 @@ export default {
     /* margin: 0% !important;
     padding: 0% !important; */
   }
+  @keyframes slideFromRight {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(15px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
+  }
 }
 @media only screen and (max-width: 375px) {
   .card-cont {
-    margin-left: -3rem !important;
+    margin-left: -2rem !important;
+  }
+  @keyframes slideFromRight {
+    0% {
+      transform: translateY(30px);
+      opacity: 0;
+    }
+    50% {
+      transform: translateY(15px);
+      opacity: 0.5;
+    }
+    100% {
+      transform: translateY(0px);
+      opacity: 1;
+    }
   }
 }
 @media only screen and (max-width: 320px) {
   .card-cont {
-    margin-left: -4.5rem !important;
+    margin-left: -3.4rem !important;
+  }
+  @keyframes slideFromRight {
+    0% {
+      margin-left: 10%;
+      opacity: 0;
+    }
+    50% {
+      margin-left: 5%;
+      opacity: 0.5;
+    }
+    100% {
+      margin-left: 0%;
+      opacity: 1;
+    }
   }
 }
 </style>

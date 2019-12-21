@@ -1,11 +1,11 @@
 <template>
-  <div class="collapse" style="width: 23rem;" id="Login">
+  <div style="width: 23rem;">
     <div class="login p-4">
       <div style="overflow:hidden;display: flex;">
         <h1 class="login-title">Login</h1>
         <div class="title-skew"></div>
       </div>
-      <div class="login-card-body p-0" style>
+      <div class="login-card-body p-0" @keypress.enter="checkUser">
         <p class="login-input-label p-0 mb-0 mt-1 float-left">Email</p>
         <b-form-input
           id="name-formatter"
@@ -24,7 +24,7 @@
           class="login-user-input"
         ></b-form-input>
         <p class="required-alert my-1">{{ errors.first("password") }}</p>
-        <div class="row  mt-4">
+        <div class="row mt-4">
           <mdb-btn
             type="submit"
             size="sm"
@@ -32,16 +32,14 @@
             @keypress="checkUser"
             @click="checkUser"
             color="info"
-            >Login</mdb-btn
-          >
+          >Login</mdb-btn>
           <mdb-btn
             type="button"
             size="sm"
             class="m-auto login-button"
             color="info"
             @click="clearData"
-            >cancel</mdb-btn
-          >
+          >cancel</mdb-btn>
         </div>
       </div>
     </div>
@@ -49,16 +47,14 @@
 </template>
 
 <script>
-import { mdbInput, mdbBtn } from "mdbvue";
+import { mdbBtn } from "mdbvue";
 import { UserDetails } from "../../service/userdetail.js";
 import Alert from "../../widget/Alert.vue";
 
 const userDetail = new UserDetails();
 export default {
   components: {
-    "mdb-input": mdbInput,
-    "mdb-btn": mdbBtn,
-    "w-alert": Alert
+    "mdb-btn": mdbBtn
   },
   data() {
     return {
@@ -117,9 +113,15 @@ export default {
   /* border-right: 1px solid black; */
   border-top-left-radius: 5%;
   border-bottom-right-radius: 5%;
-  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
   width: 22rem;
   background-color: #fff;
+  transition: 0.5s;
+}
+.login:hover {
+  box-shadow: 7px 6px 10px -1px rgba(0, 0, 0, 0.54);
+}
+.login div h1 {
+  margin-top: 5px;
 }
 .title-skew {
   background-color: #17a2b8;
@@ -136,12 +138,11 @@ export default {
 .login-title {
   font-weight: 700;
   margin-bottom: 1rem !important;
-  color: teal;
+  color: #17a2b8;
 }
 .login-card-body {
   padding: 0;
-  width: 18rem;
-  color: teal;
+  color: #17a2b8;
 }
 .login-input-label {
   font-weight: 400;
@@ -156,6 +157,8 @@ export default {
   border-bottom: 1px solid #17a2b8 !important;
   padding-left: 0.5rem;
   border-radius: 0px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 .login-user-input:focus {
   box-shadow: none !important;
@@ -163,6 +166,7 @@ export default {
 }
 .login-button {
   width: 8rem;
+  font-size: 15px;
 }
 .required-alert {
   font-size: 15px;

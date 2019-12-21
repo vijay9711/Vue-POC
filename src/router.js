@@ -15,9 +15,6 @@ const router = new Router({
       path: "/dashboard",
       name: "dashboard",
       component: () => import("./views/dashboard.vue"),
-      meta: {
-        layout: "navbar"
-      }
     }
   ]
 });

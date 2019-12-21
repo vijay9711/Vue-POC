@@ -87,14 +87,12 @@
   </div>
 </template>
 <script>
-import Nav from "../components/navbar/navbar.vue";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbvue/build/css/mdb.css";
 import { mdbInput, mdbBtn } from "mdbvue";
 import { constants } from "crypto";
 export default {
   components: {
-    Nav,
     "mdb-input": mdbInput,
     "mdb-btn": mdbBtn
   },

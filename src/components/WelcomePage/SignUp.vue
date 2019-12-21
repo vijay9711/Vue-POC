@@ -1,5 +1,5 @@
 <template>
-  <div class="collapse" style="width: 23rem;" id="Signup">
+  <div style="width: 23rem;">
     <div class="col-xs-2 signup p-4" style>
       <div style="overflow:hidden;display: flex;">
         <h1 class="signup-title">SignUp</h1>
@@ -60,16 +60,14 @@
             color="info"
             size="sm"
             @click="signUp"
-            >SignUp</mdb-btn
-          >
+          >SignUp</mdb-btn>
           <mdb-btn
             type="button"
             class="m-auto signin-button"
             size="sm"
             color="info"
             @click="clearData"
-            >cancel</mdb-btn
-          >
+          >cancel</mdb-btn>
         </div>
       </div>
     </div>
@@ -77,13 +75,12 @@
 </template>
 
 <script>
-import { mdbInput, mdbBtn } from "mdbvue";
+import { mdbBtn } from "mdbvue";
 import { UserDetails } from "../../service/userdetail.js";
 
 const userDetail = new UserDetails();
 export default {
   components: {
-    "mdb-input": mdbInput,
     "mdb-btn": mdbBtn
   },
   data() {
@@ -159,14 +156,20 @@ export default {
   /* border-right: 1px solid black; */
   border-top-left-radius: 5%;
   border-bottom-right-radius: 5%;
-  box-shadow: 11px 10px 11px 1px rgba(0, 0, 0, 0.19);
   width: 22rem;
   background-color: #fff;
+  transition: 0.5s;
+}
+.signup:hover {
+  box-shadow: 7px 6px 10px -1px rgba(0, 0, 0, 0.54);
+}
+.signup div h1 {
+  margin-top: 5px;
 }
 .signup-title {
   font-weight: 700;
   margin-bottom: 1rem !important;
-  color: teal;
+  color: #17a2b8;
 }
 .title-skew {
   background-color: #17a2b8;
@@ -186,8 +189,7 @@ export default {
 }
 .signup-body {
   padding: 0;
-  width: 18rem;
-  color: teal;
+  color: #17a2b8;
 }
 input[type="text"] {
   background-color: transparent !important;
@@ -197,6 +199,7 @@ input[type="password"] {
 }
 .signin-button {
   width: 8rem;
+  font-size: 15px;
 }
 .signup-user-input {
   width: 100%;
