@@ -20,11 +20,6 @@ import $ from "jquery";
 
 const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
-$(window).on("scroll", function() {
-  let height = document.getElementById("#dashboard-content");
-  console.log(height);
-  // check_if_in_view(height)
-});
 export default {
   components: {
     About,
@@ -55,6 +50,12 @@ export default {
     console.log(this.$route.query.id);
   },
   methods: {
+    scrollToItem(event) {
+      var elmnt = document.getElementById(event);
+      elmnt.scrollIntoView({
+         behavior: 'smooth'
+      });
+    },
     socialUser() {
       this.params = this.$route.query.id;
       socialUserService.getSocialUserDetails(this.params).then(res => {
