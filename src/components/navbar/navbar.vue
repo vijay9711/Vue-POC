@@ -165,7 +165,7 @@ export default {
 }
 @media only screen and (max-width: 580px) {
   .nav-cont {
-    padding: 0rem;
+    padding: 0rem !important;
   }
   .nav-container {
     display: flex;

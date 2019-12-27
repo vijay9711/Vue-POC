@@ -1,7 +1,8 @@
 <template>
   <div class="welcome-page">
     <w-alert :alertText="alertMessage" :getType="alertType" v-if="alert" />
-
+    <lottie-player class="web-animation row p-0 m-auto mx-auto" src="https://assets7.lottiefiles.com/packages/lf20_znCQsa.json"  background="transparent"  speed="1"  style="width: 600px; height: 600px;"  loop  autoplay >
+    </lottie-player>
     <div class="row w-50 p-5 m-auto auth-form">
       <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12 p-0 m-0 login-block">
         <div class="w-50 m-auto inline-block">
@@ -99,6 +100,9 @@ export default {
 </script>
 
 <style scoped>
+.web-animation {
+  position: absolute;
+}
 .login-block {
   margin: auto;
 }
@@ -174,12 +178,13 @@ export default {
 @media only screen and (max-width: 995px) {
   .auth-form {
     width: 100% !important;
-    /* padding: 0 !important; */
-    /* border: 1px solid #4285f4 !important; */
     text-align: -webkit-center;
-
-    /* margin: 0% !important;
-    padding: 0% !important; */
+  }
+  .web-animation {
+    width: 300px !important;
+    height: 300px !important;
+    top: -7rem;
+    left: 16rem;
   }
   @keyframes slideFromRight {
     0% {
@@ -196,9 +201,20 @@ export default {
     }
   }
 }
+@media only screen and (max-width: 500px) {
+  .web-animation {
+    left: 4rem;
+  }
+}
 @media only screen and (max-width: 375px) {
   .card-cont {
     margin-left: -2rem !important;
+  }
+  .web-animation {
+    width: 200px !important;
+    height: 200px !important;
+    top: -2rem;
+    left: 6rem;
   }
   @keyframes slideFromRight {
     0% {
@@ -218,6 +234,12 @@ export default {
 @media only screen and (max-width: 320px) {
   .card-cont {
     margin-left: -3.4rem !important;
+  }
+  .web-animation {
+    width: 200px !important;
+    height: 200px !important;
+    top: -2rem;
+    left: 4rem;
   }
   @keyframes slideFromRight {
     0% {
