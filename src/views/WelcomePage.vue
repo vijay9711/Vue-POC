@@ -125,7 +125,7 @@ export default {
   cursor: pointer;
   min-width: 8rem;
   font-weight: 500;
-  box-shadow: 6px 7px 16px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 8px 9px 0px rgba(64, 64, 64, 1);
 }
 .google-sign-up a {
   color: #17a2b8;

@@ -132,7 +132,7 @@ export default {
   width: 100%;
   padding-left: 15rem;
   /* margin-bottom: 1rem; */
-  /* border-radius: 25%; */
+  border-radius: 3%;
   /* border-bottom-right-radius: 100%; */
 }
 .login-title {

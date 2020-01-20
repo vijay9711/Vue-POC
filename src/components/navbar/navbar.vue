@@ -1,6 +1,26 @@
 <template>
   <div class="position-fixed nav-cont py-3 noselect" style="z-index:100;width:100%;">
-    <div :class="extend?'mob-nav':null">
+    
+    <div :class="extend?'mob-nav':null"  @blur="toggle">
+      <vue-particles
+              color="#1aa6b7"
+              :particleOpacity="1"
+              :particlesNumber="400"
+              shapeType="circle"
+              :particleSize="2"
+              linesColor="#232323"
+              :linesWidth="1"
+              :lineLinked="true"
+              :lineOpacity="0.4"
+              :linesDistance="10"
+              :moveSpeed="1"
+              :hoverEffect="true"
+              hoverMode="grab"
+              :clickEffect="true"
+              clickMode="repulse"
+              style="background-color:#f7f8fc;diplay:block;position:absolute; width: 100%;height: 100%;top: 0;"
+           >
+      </vue-particles>
       <div class="row close-icon m-0">
         <div v-if="extend" class="col-12 p-0 py-2 pl-2">
           <img
@@ -12,32 +32,25 @@
         </div>
       </div>
       <div class="row m-0 nav-container">
+        
         <nav id="navigation-bar" v-if="extend" class="col-12 col-xs-12 col-sm-12 col-md-12 p-0">
           <ul class="nav-ul my-auto">
-            <li @click="scroll('home')" class="nav-item"><a >Home</a></li>
+            <li @click="scroll('home')" class="nav-item"><a>Home</a></li>
             <li @click="scroll('about')" class="nav-item"><a>About</a></li>
             <li @click="scroll('projects')" class="nav-item"><a>Projects</a></li>
             <li @click="scroll('blog')" class="nav-item"><a>Profile</a></li>
             <li @click="scroll('contact')" class="nav-item"><a>Contact</a></li>
           </ul>
         </nav>
-        <!-- <div class="col-6 col-md-6 p-0 text-right web-user-profile" v-if="!extend">
-            <img class="user-profile" src="../../assets/profile/user.svg" />
-        </div> -->
       </div>
     </div>
     <div class="row m-0 open-menu-and-profile p-2">
       <div class="col-6 open-menu p-0" >
         <div @click="toggle">
-          <span class="open-nav"></span>
-          <span class="open-nav"></span>
-          <span class="open-nav"></span>
+          <img class="open-nav" src="../../assets/sidebar/menu.svg">
         </div>
       </div>
       <div id="set-toggle-true" @click="setToggle"></div>
-      <!-- <div class="col-6 p-0 text-right">
-        <img class="user-profile" src="../../assets/profile/user.svg" />
-      </!--> 
     </div>
     <div class="nav-skew"></div>
   </div>
@@ -72,8 +85,8 @@ export default {
 
 <style lang="scss" scoped>
 .nav-cont {
-  background: #fff;
-  height: 5rem;
+  background: #232323;
+  max-height: 5rem;
 }
 
 .nav-item {
@@ -96,7 +109,7 @@ export default {
 }
 .nav-item a:hover {
   font-size: 24px;
-  font-weight: 500;
+  font-weight: 600;
 }
 .nav-item:focus {
   text-decoration: underline;
@@ -138,7 +151,7 @@ export default {
   background: #262626;
 }
 /* The navigation menu links */
-.nav-ul li {
+.nav-ul .li {
   animation: sideBarItem 1s 1;
 }
 @keyframes sideBarItem {
@@ -178,10 +191,15 @@ export default {
   }
   .nav-ul {
     display: block !important;
-    padding-left: 1.9rem;
+    margin: auto;
   }
+  .nav-ul li {
+    text-align: center;
+    width: 70%;
+    font-size: 20px;
+  }
+
   .open-menu {
-    // background: #1aa6b7;
     height: 2rem !important;
     display: flex;
     div {
@@ -193,84 +211,59 @@ export default {
       width: 1.3rem;
     }
     .open-nav {
-      content: "";
-      width: 2rem;
       visibility: visible !important;
-      height: 4px !important;
-      background: black;
-      margin-top: 0.2rem;
-      border-top-right-radius: 25% !important;
-      border-bottom-right-radius: 25% !important;
-      border-radius: 25%;
-      // margin-bottom: 0.1rem;
       cursor: pointer;
     }
   }
   .nav-container nav ul li {
-    // padding: 1rem;
     margin-top: 2%;
     margin-bottom: 2%;
   }
   .mob-nav {
     background: #262626 !important;
     position: fixed;
-    // top: 20rem;
-    width: 13rem;
-    height: 26rem;
+    width: 100%;
+    height: 75%;
     overflow: hidden;
     z-index: 100;
-    // padding: 1rem;
-    border-bottom-right-radius: 50%;
-    animation: openNav 0.2s linear 1;
+    border-bottom-right-radius: 100%;
+    animation: openNav 0.1s linear 1;
   }
   .open-menu-and-profile {
     position: fixed;
     display: flex;
     width: 100%;
+    max-height: 2.4rem;
     background: #fff;
   }
   .close-icon {
     display: block !important;
   }
   .close-nav {
-    width: 2rem;
+    width: 1.6rem;
     visibility: visible !important;
     border-radius: 100%;
-    animation: closeSpin 0.4s 1 linear;
-  }
-  @keyframes closeSpin {
-    100% {
-      transform: rotateZ(360deg);
-    }
   }
   @keyframes openNav {
     0% {
-      width: 3rem;
-      height: 0.2rem;
-      // border-top-right-radius: 100%;
-      border-bottom-right-radius: 0%;
-      // border-bottom-left-radius: 100%;
+      width: 0%;
+      height: 0%;
+      border-bottom-right-radius: 20%;
     }
     50% {
-      width: 10rem;
-      height: 4rem;
-      // border-top-right-radius: 50%;
-      border-bottom-right-radius: 0%;
-      // border-bottom-left-radius: 50%;
+      width: 25%;
+      height: 30%;
+      border-bottom-right-radius: 40%;
     }
     75% {
-      width: 13rem;
-      height: 20rem;
-      // border-top-right-radius: 50%;
-      border-bottom-right-radius: 25%;
-      // border-bottom-left-radius: 50%;
+      width: 45%;
+      height: 40%;
+      border-bottom-right-radius: 50%;
     }
     100% {
-      width: 13rem;
-      height: 26rem;
-      // border-top-right-radius: 20%;
+      width: 100%;
+      height: 50%;
       border-bottom-right-radius: 50%;
-      // border-bottom-left-radius: 20%;
     }
   }
 }
