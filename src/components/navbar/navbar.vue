@@ -1,8 +1,6 @@
 <template>
   <div class="position-fixed nav-cont py-3 noselect" style="z-index:100;width:100%;">
-    
-    <div :class="extend?'mob-nav':null"  @blur="toggle">
-      <vue-particles
+    <vue-particles
               color="#1aa6b7"
               :particleOpacity="1"
               :particlesNumber="400"
@@ -21,6 +19,8 @@
               style="background-color:#f7f8fc;diplay:block;position:absolute; width: 100%;height: 100%;top: 0;"
            >
       </vue-particles>
+    <div :class="extend?'mob-nav':null"  @blur="toggle">
+      
       <div class="row close-icon m-0">
         <div v-if="extend" class="col-12 p-0 py-2 pl-2">
           <img
@@ -247,23 +247,23 @@ export default {
   @keyframes openNav {
     0% {
       width: 0%;
-      height: 0%;
-      border-bottom-right-radius: 20%;
+      height: 10%;
+      border-bottom-right-radius: 100%;
+    }
+    25% {
+      width: 25%;
+      height: 25%;
+      border-bottom-right-radius: 100%;
     }
     50% {
-      width: 25%;
-      height: 30%;
-      border-bottom-right-radius: 40%;
-    }
-    75% {
-      width: 45%;
-      height: 40%;
-      border-bottom-right-radius: 50%;
+      width: 50%;
+      height: 50%;
+      border-bottom-right-radius: 100%;
     }
     100% {
       width: 100%;
-      height: 50%;
-      border-bottom-right-radius: 50%;
+      height: 75%;
+      border-bottom-right-radius: 100%;
     }
   }
 }
