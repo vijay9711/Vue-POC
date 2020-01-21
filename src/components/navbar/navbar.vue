@@ -60,7 +60,7 @@ export default {
   name: "nav",
   data() {
     return {
-      links: [{}],
+      links: [{ }],
       extend: true
     };
   },
