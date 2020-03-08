@@ -1,7 +1,7 @@
 <template>
   <div class="position-fixed nav-cont py-3 noselect" style="z-index:100;width:100%;">
     <vue-particles
-              color="#1aa6b7"
+              color="#fff"
               :particleOpacity="1"
               :particlesNumber="400"
               shapeType="circle"
@@ -16,7 +16,7 @@
               hoverMode="grab"
               :clickEffect="true"
               clickMode="repulse"
-              style="background-color:#f7f8fc;diplay:block;position:absolute; width: 100%;height: 100%;top: 0;"
+              style="background-color:#34495e;diplay:block;position:absolute; width: 100%;height: 100%;top: 0;"
            >
       </vue-particles>
     <div :class="extend?'mob-nav':null"  @blur="toggle">
@@ -27,7 +27,7 @@
             id="close-nav"
             @click="toggle"
             class="close-nav"
-            src="../../assets/sidebar/cancel.svg"
+            src="../../assets/sidebar/closeBlack.svg"
           />
         </div>
       </div>
@@ -47,7 +47,7 @@
     <div class="row m-0 open-menu-and-profile p-2">
       <div class="col-6 open-menu p-0" >
         <div @click="toggle">
-          <img class="open-nav" src="../../assets/sidebar/menu.svg">
+          <img class="open-nav" src="../../assets/sidebar/whiteMenu.svg">
         </div>
       </div>
       <div id="set-toggle-true" @click="setToggle"></div>
@@ -87,19 +87,21 @@ export default {
 .nav-cont {
   background: #232323;
   max-height: 5rem;
+  box-shadow: inset 0px -6px 3px -1px rgba(0, 0, 0, 0.75);
 }
 
 .nav-item {
   font-family: "Montserrat";
-  font-weight: 400;
+  font-weight: 600;
   border: none;
   outline: none;
   text-decoration: none;
   font-size: 21px;
   cursor: pointer;
-  color: #1aa6b7 !important;
+  color: #fff;
   overflow: hidden !important;
   transition: 0.3s;
+  letter-spacing: 4px;
 }
 .nav-item:focus,
 .nav-item:active {
@@ -174,11 +176,15 @@ export default {
     font-size: 16px;
     padding: 1rem;
     cursor: pointer !important;
+    color: #fff !important;
   }
 }
 @media only screen and (max-width: 580px) {
   .nav-cont {
     padding: 0rem !important;
+  }
+  .nav-item {
+    color: #232323 !important;
   }
   .nav-container {
     display: flex;
@@ -220,10 +226,10 @@ export default {
     margin-bottom: 2%;
   }
   .mob-nav {
-    background: #262626 !important;
+    background: #fff !important;
     position: fixed;
     width: 100%;
-    height: 75%;
+    height: 95%;
     overflow: hidden;
     z-index: 100;
     border-bottom-right-radius: 100%;
@@ -234,7 +240,7 @@ export default {
     display: flex;
     width: 100%;
     max-height: 2.4rem;
-    background: #fff;
+    background: #34495e;
   }
   .close-icon {
     display: block !important;

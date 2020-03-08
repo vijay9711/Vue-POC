@@ -79,7 +79,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .dashboard {
-  background: #f7f8fc;
+  background: #34495e;
   height: 100vh;
   overflow: scroll;
   overflow-x: hidden;
