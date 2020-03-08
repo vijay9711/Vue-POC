@@ -1,13 +1,14 @@
 <template>
-  <div class="home">
+  <div class="home d-flex-column justify-content-center">
     <div class="p-3 pt-4">
         <div class="row p-0 m-0">
-        <div class="col-6 p-2 m-0">
-          <p class="my-name mb-0">Hello, </p>
-          <p class="my-name"> I'm vijay</p>
-        </div>
-        <div class="col-6 p-0 m-0">
-
+        <div class="col-12 p-3 m-0">
+          <p class="my-name mb-0">Hello, {{username}}</p>
+          <p class="my-name">I'm vijay</p>
+          <p>I'm a Full-stack web developer</p>
+          <vue-typed-js :strings="['self-taught','passionate','']" :loop="true" :backSpeed="50">
+           <span>I'm  <span class="typing"></span></span>
+          </vue-typed-js>
         </div>
       </div>
     </div>
@@ -16,9 +17,12 @@
 
 <script>
 // @ is an alias to /src
-
+import VueTypedJs from 'vue-typed-js'
 export default {
-  name: "home"
+  name: "home",
+  component:{
+    'vue-typed-js':VueTypedJs
+  }
 };
 </script>
 <style lang="scss" scoped>

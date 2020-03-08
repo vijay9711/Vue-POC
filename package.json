@@ -35,7 +35,8 @@
     "vee-validate": "^2.2.13",
     "vue": "^2.6.10",
     "vue-particles": "^1.0.9",
-    "vue-router": "^3.0.3"
+    "vue-router": "^3.0.3",
+    "vue-typed-js": "^0.1.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "^3.8.0",
