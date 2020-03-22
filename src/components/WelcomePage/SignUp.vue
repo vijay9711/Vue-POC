@@ -39,7 +39,7 @@
         <b-form-input
           id="email"
           v-model="email"
-          type="text"
+          type="email"
           autocomplete="none"
           class="signup-user-input"
           placeholder
@@ -105,12 +105,15 @@ export default {
         phone: this.phone,
         password: this.password
       };
+      var emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+      let isValidEmail = emailPattern.test(this.email);
+        console.log(isValidEmail)
       if (
         this.first_name.length > 0 &&
         this.last_name.length > 0 &&
         this.email.length > 0 &&
         this.password.length > 0 &&
-        this.phone
+        this.phone && isValidEmail
       ) {
         userDetail.signUp(user).then(res => {
           if (res.status == "200") {
@@ -130,13 +133,20 @@ export default {
             this.clearData();
           }
         });
-      } else {
-        this.alertType = "alert";
-        this.alertMessage = "Please fill the form to sign-up";
-        this.alert = true;
-        setTimeout(() => {
-          this.alert = false;
-        }, 3000);
+      } else if(!isValidEmail && this.email.length){
+        console.log(isValidEmail)
+         this.alertMessage = {
+              alertMsg: "Please enter valid email address.",
+              alertType: "alert"
+            };
+            this.$emit("alertMsg", this.alertMessage);
+      }
+       else {
+        this.alertMessage = {
+              alertMsg: "There is a error occur try to sign-up again",
+              alertType: "alert"
+            };
+            this.$emit("alertMsg", this.alertMessage);
       }
     },
     clearData() {

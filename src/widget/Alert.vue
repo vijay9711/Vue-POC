@@ -32,11 +32,11 @@ export default {
       console.log(getType);
       switch (getType) {
         case "success":
-          return "border:1px solid;border-radius:6px; border-color:#4BB543; outline-color:#4BB543; background-color:#4BB543; color:#fff;";
+          return "border:1px solid;border-radius:6px; border-color:#76ff03; outline-color:#76ff03; background-color:#76ff03; color:#fff;";
         case "warning":
-          return "border:1px solid;border-radius:6px; border-color:#FFCC00; outline-color:#FFCC00; background-color:#FFCC00; color:#fff;";
+          return "border:1px solid;border-radius:6px; border-color:#ffea00; outline-color:#ffea00; background-color:#ffea00; color:#fff;";
         case "alert":
-          return "border:1px solid;border-radius:6px; border-color:#FF4E4E; outline-color:#FF4E4E; background-color:#FF4E4E; color:#fff;";
+          return "border:1px solid;border-radius:6px; border-color:#f44336; outline-color:#f44336; background-color:#f44336; color:#fff;";
         default:
           return "border-radius:6px";
       }
