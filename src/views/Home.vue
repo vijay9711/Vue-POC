@@ -6,11 +6,10 @@
             <!-- <img class="my-image" src="../assets/home/intro.jpeg">  -->
           </div>
           <div class="my-content col-s-12 col-xs-12 col-md-6 p-3 m-0">
-            <p class="my-name mb-0">Hello, {{username}}</p>
-            <p class="my-name ">I'm vijay</p>
-            <p>I'm a Full-stack web developer</p>
-            <vue-typed-js :strings="['self-taught','passionate','']" :loop="true" :backSpeed="50">
-            <span>I'm  <span class="typing"></span></span>
+            <p class="my-name mb-2">Hello, <skew-text v-if="username" :text="username" /></p>
+            <p class="my-name ">I'm vijay, a Full-stack web developer</p>
+            <vue-typed-js :strings="['self-taught','passionate','precognition']" :loop="true" :backSpeed="50">
+              <span>I'm <span class="typing"></span></span>
             </vue-typed-js>
             <p>
               
@@ -23,12 +22,19 @@
 
 <script>
 // @ is an alias to /src
-import VueTypedJs from 'vue-typed-js'
+import VueTypedJs from 'vue-typed-js';
+import SkewText from "../widget/SkewText.vue";
+
 export default {
   name: "home",
-  component:{
-    'vue-typed-js':VueTypedJs
-  }
+  props:["username"],
+  components:{
+    'skew-text': SkewText
+  },
+  data(){
+    return{
+    }
+  },
 };
 </script>
 <style lang="scss" scoped>
@@ -36,12 +42,11 @@ export default {
   font-family: "Courier New", Courier, monospace;
   font-size: 19px;
   min-height: 100vh;
-  padding-top: 5%;
+  padding-top: 6%;
   color: #fff;
   .row {
     background: #263238;
     border-radius: 5px;
-    margin-top: 2px;
     .my-image {
       width: 100%;
       height: 80vh;
@@ -52,8 +57,22 @@ export default {
       background-image: url("../assets/home/intro.jpeg");
       background-size: cover;
       background-repeat: no-repeat;
+      opacity: 0.8;
+      transition-duration: 0.3s;
     }
     .my-content {
+      .my-name {
+        .username {
+          background-color: #fff;
+          color: #263238;
+          font-weight: 800;
+        }
+      }
+    }
+  }
+  .row:hover {
+    .my-image {
+      opacity: 1;
     }
   }
 }
@@ -85,6 +104,9 @@ export default {
       .my-name {
         font-size: 19px;
         font-weight: 500;
+        .username {
+          background-color: #fff;
+        }
       }
     }
   }

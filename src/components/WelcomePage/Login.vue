@@ -38,7 +38,7 @@
             size="sm"
             class="m-auto login-button"
             color="info"
-            @click="clearData"
+            @click="clearForm"
           >cancel</mdb-btn>
         </div>
       </div>
@@ -74,19 +74,7 @@ export default {
       };
       console.log(data);
       if (this.email.length > 0 && this.password.length > 0) {
-        userDetail.login(data).then(res => {
-          if (res.data[0].access === "granted") {
-            localStorage.setItem("user_id", res.data[0].id);
-            this.$router.push({ name: "dashboard" });
-          } else if (res.data[0].access === "denied") {
-            this.password = "";
-            this.alertMessage = {
-              alertMsg: "Email or password incorrect",
-              alertType: "warning"
-            };
-            this.$emit("alertMsg", this.alertMessage);
-          }
-        });
+        this.$emit("checkUser",data)
       } else {
         this.alertMessage = {
           alertMsg: "Please enter your email and password",
@@ -95,7 +83,7 @@ export default {
         this.$emit("alertMsg", this.alertMessage);
       }
     },
-    clearData() {
+    clearForm() {
       (this.first_name = ""),
         (this.last_name = ""),
         (this.password = ""),
@@ -125,7 +113,6 @@ export default {
 }
 .title-skew {
   background-color: #17a2b8;
-
   transform: skew(30deg, 0deg);
   margin-left: 5%;
   height: 40px;

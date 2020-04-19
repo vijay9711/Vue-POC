@@ -1,8 +1,9 @@
 <template>
   <div>
+    <Loader :loader="loader" />
     <Nav ref="sidebar" @selectedItem="scrollToItem($event)" />
     <div id="dashboard-content" class="dashboard-content dashboard">
-      <Home id="home" />
+      <Home id="home" :username="userData.firstName+' '+userData.lastName"/>
       <About id="about" />
       <projects id="projects" />
     </div>
@@ -17,6 +18,7 @@ import Home from "./Home.vue";
 import Projects from "./Projects.vue";
 import "../js/dashboard.js";
 import $ from "jquery";
+import Loader from "../widget/Loader.vue";
 
 const userDetails = new UserDetails();
 const socialUserService = new SocialUserService();
@@ -25,18 +27,20 @@ export default {
     About,
     Nav,
     Home,
-    Projects
+    Projects,
+    Loader
   },
   data() {
     return {
       info: null,
+      loader:false,
       params: [],
       userData: []
     };
   },
   created() {
     // console.log(this.$route.query.id);
-    const user_id = localStorage.getItem("user_id");
+    const user_id = sessionStorage.getItem("user_id");
     if (user_id) {
       console.log("userid ");
       this.getUserDetails();
@@ -57,20 +61,30 @@ export default {
       });
     },
     socialUser() {
+      this.loader = true
       this.params = this.$route.query.id;
       socialUserService.getSocialUserDetails(this.params).then(res => {
+        this.loader = false
         if (res.statusText === "OK") {
-          this.userData.push(res.data[0]);
-          localStorage.setItem("user_id", this.params);
+          this.userData  = res.data[0];
+          console.log(this.userData)
+          sessionStorage.setItem("user_id", this.params);
         }
-      });
+      }).catch(e=>{
+        this.loader = false
+        console.log(e)
+      })
     },
     getUserDetails() {
-      let userID = localStorage.getItem("user_id");
+      this.loader = true
+      let userID = sessionStorage.getItem("user_id");
       userDetails.getUser(userID).then(res => {
+        this.loader = false
         this.userData = res.data[0];
+        console.log(res.data[0])
         if (this.userData.status.Status === 200) {
           this.userData = res.data[0].data;
+          sessionStorage.setItem("username", res.data[0].data.First_name + " " + res.data[0].data.Last_name )
         }
       });
     }

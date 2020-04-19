@@ -66,7 +66,7 @@
             class="m-auto signin-button"
             size="sm"
             color="info"
-            @click="clearData"
+            @click="clearForm"
           >cancel</mdb-btn>
         </div>
       </div>
@@ -123,14 +123,14 @@ export default {
               alertType: "success"
             };
             this.$emit("alertMsg", this.alertMessage);
-            this.clearData();
+            this.clearForm();
           } else {
             this.alertMessage = {
               alertMsg: "There is a error occur try to sign-up again",
               alertType: "alert"
             };
             this.$emit("alertMsg", this.alertMessage);
-            this.clearData();
+            this.clearForm();
           }
         });
       } else if(!isValidEmail && this.email.length){
@@ -149,7 +149,7 @@ export default {
             this.$emit("alertMsg", this.alertMessage);
       }
     },
-    clearData() {
+    clearForm() {
       (this.first_name = ""),
         (this.last_name = ""),
         (this.password = ""),

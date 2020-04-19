@@ -1,4 +1,6 @@
 <template>
+<div>
+  <Loader :loader="loader" />
   <div class="welcome-page">
     <w-alert :alertText="alertMessage" :getType="alertType" v-if="alert" />
     <div>
@@ -25,14 +27,18 @@
         <c-login
           :class="modalToggle?'modal-slide login-block':'modal-close hide-modal'"
           @alertMsg="showAlert($event)"
+          @checkUser="login($event)"
+          ref="login"
         />
         <c-signUp
           :class="!modalToggle?'modal-slide login-block':'modal-close hide-modal'"
           @switchLogin="switchLogin()"
           @alertMsg="showAlert($event)"
+          ref="signUp"
         />
       </div>
     </div>
+  </div>
   </div>
 </template>
 <script>
@@ -42,7 +48,8 @@ import Alert from "../widget/Alert.vue";
 import Login from "../components/WelcomePage/Login.vue";
 import SignUp from "../components/WelcomePage/SignUp.vue";
 import InputButton from "../widget/InputButton.vue";
-// import router from "../router.js";
+import Loader from "../widget/Loader.vue";
+
 import $ from "jquery";
 
 const userDetail = new UserDetails();
@@ -51,11 +58,13 @@ export default {
     "w-alert": Alert,
     "c-login": Login,
     "c-signUp": SignUp,
-    "w-button": InputButton
+    "w-button": InputButton,
+    Loader
   },
   props: {},
   data() {
     return {
+      loader:false,
       first_name: "",
       last_name: "",
       email: "",
@@ -71,14 +80,14 @@ export default {
     };
   },
   created() {
-    localStorage.clear();
-    console.log(this.modalToggle);
+    sessionStorage.clear();
   },
   methods: {
     googleSignIn() {
       document.getElementById("googleSignIn").click();
     },
     showAlert(event) {
+      this.loader =false
       this.alertType = event.alertType;
       this.alertMessage = event.alertMsg;
       this.alert = true;
@@ -90,12 +99,32 @@ export default {
       if (!this.modalToggle) {
         this.switchButtonText = "signup";
         this.modalToggle = true;
+        this.$refs.signUp.clearForm();
         console.log(this.modalToggle);
       } else if (this.modalToggle) {
         this.switchButtonText = "login";
         this.modalToggle = false;
+        this.$refs.login.clearForm();
         console.log(this.modalToggle);
       }
+    },
+    login(event){
+      this.loader = true
+      userDetail.login(event).then(res => {
+          if (res.data[0].access === "granted") {
+            this.loader = false
+            sessionStorage.setItem("user_id", res.data[0].id);
+            this.$router.push({ name: "dashboard" });
+          } else if (res.data[0].access === "denied") {
+            this.loader = false
+            this.$refs.login.password = "";
+            this.alertMessage = {
+              alertMsg: "Email or password incorrect",
+              alertType: "warning"
+            };
+            this.showAlert(this.alertMessage);
+          }
+        });
     }
   }
 };

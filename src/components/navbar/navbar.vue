@@ -20,19 +20,17 @@
            >
       </vue-particles>
     <div :class="extend?'mob-nav':null"  @blur="toggle">
-      
       <div class="row close-icon m-0">
         <div v-if="extend" class="col-12 p-0 py-2 pl-2">
           <img
             id="close-nav"
-            @click="toggle"
+            @click="toggle()"
             class="close-nav"
             src="../../assets/sidebar/closeBlack.svg"
           />
         </div>
       </div>
       <div class="row m-0 nav-container">
-        
         <nav id="navigation-bar" v-if="extend" class="col-12 col-xs-12 col-sm-12 col-md-12 p-0">
           <ul class="nav-ul my-auto">
             <li @click="scroll('home')" class="nav-item"><a>Home</a></li>
@@ -40,14 +38,18 @@
             <li @click="scroll('projects')" class="nav-item"><a>Projects</a></li>
             <li @click="scroll('blog')" class="nav-item"><a>Profile</a></li>
             <li @click="scroll('contact')" class="nav-item"><a>Contact</a></li>
+            <button @click="logOut()"  class="logout nav-item m-0">LogOut 
+              <img class="logout-img" v-if="extend" src="../../assets/sidebar/logout-black.svg">
+              <img class="logout-img" v-if="!extend" src="../../assets/sidebar/logout.svg">
+            </button>
           </ul>
         </nav>
       </div>
     </div>
-    <div class="row m-0 open-menu-and-profile p-2">
+    <div class="row m-0 open-menu-and-profile p-2" v-if="!extend">
       <div class="col-6 open-menu p-0" >
-        <div @click="toggle">
-          <img class="open-nav" src="../../assets/sidebar/whiteMenu.svg">
+        <div @click="toggle()">
+          <img class="open-nav" src="../../assets/sidebar/menu.svg">
         </div>
       </div>
       <div id="set-toggle-true" @click="setToggle"></div>
@@ -65,19 +67,20 @@ export default {
     };
   },
   methods: {
-    clearUserData() {
-      localStorage.clear();
-      this.$router.push({ name: "Authentication" });
-    },
     scroll(item) {
       console.log(item);
       this.$emit("selectedItem", item);
     },
     setToggle() {
+      console.log(this.extend);
       this.extend = true;
     },
     toggle() {
+      console.log(this.extend)
       this.extend = !this.extend;
+    },
+    logOut(){
+      this.$router.push({ name: "Authentication" });
     }
   }
 };
@@ -89,7 +92,9 @@ export default {
   max-height: 5rem;
   box-shadow: inset 0px -6px 3px -1px rgba(0, 0, 0, 0.75);
 }
-
+.logout-img {
+  width: 20px;
+}
 .nav-item {
   font-family: "Montserrat";
   font-weight: 600;
@@ -101,7 +106,23 @@ export default {
   color: #fff;
   overflow: hidden !important;
   transition: 0.3s;
-  letter-spacing: 4px;
+  letter-spacing: 2px;
+}
+.logout {
+  background: #2196f3;
+  padding: 0px 15px;
+  outline: none;
+  border: none;
+  border-radius: 50px;
+  /* border: none;
+  font-family: "Montserrat";
+  font-weight: 600;
+  border: none;
+  outline: none;
+  text-decoration: none;
+  font-size: 21px;
+  cursor: pointer;
+  color: #fff; */
 }
 .nav-item:focus,
 .nav-item:active {
@@ -172,19 +193,30 @@ export default {
 }
 
 @media only screen and (max-width: 1000px) {
-  .nav-item {
+  .nav-item,
+  .logout {
+    background: transparent;
     font-size: 16px;
     padding: 1rem;
     cursor: pointer !important;
     color: #fff !important;
+  }
+  .logout {
+    background: #2196f3;
+    padding: 0px 10px;
+    outline: none;
+    border: none;
+    border-radius: 50px;
   }
 }
 @media only screen and (max-width: 580px) {
   .nav-cont {
     padding: 0rem !important;
   }
-  .nav-item {
+  .nav-item,
+  .logout {
     color: #232323 !important;
+    text-align: center;
   }
   .nav-container {
     display: flex;
@@ -199,7 +231,8 @@ export default {
     display: block !important;
     margin: auto;
   }
-  .nav-ul li {
+  .nav-ul li,
+  .logout {
     text-align: center;
     width: 70%;
     font-size: 20px;
@@ -217,6 +250,7 @@ export default {
       width: 1.3rem;
     }
     .open-nav {
+      width: 30px;
       visibility: visible !important;
       cursor: pointer;
     }
